@@ -4,598 +4,487 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>박기량 / Park Kiryang — 민화기반 동시대회화</title>
-<meta name="description" content="박기량 작가의 공식 포트폴리오. 전통 민화의 조형 언어로 동시대 감정을 이야기합니다.">
+<meta name="description" content="민화기반 동시대회화 작가 박기량의 공식 포트폴리오. 전통 민화의 조형 언어로 동시대 감정을 이야기합니다.">
 <meta property="og:title" content="박기량 / Park Kiryang">
 <meta property="og:description" content="민화기반 동시대회화 — 전통의 형식으로 오늘의 감정을 담습니다">
-<meta property="og:image" content="https://og-data.s3.amazonaws.com/media/artworks/half/A2702/A2702-0006.jpg">
 
-<!-- Pretendard -->
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 
 <style>
   /*
-  ─────────────────────────────────────────
-  컬러 팔레트 — 수간분채·수간석채 기반
-  따뜻한 적토(赤土)·녹청(綠靑)·황토(黃土) 계열
-  ─────────────────────────────────────────
+  ─────────────────────────────────────
+  색상: 수간분채·석채 전통 안료 계열
+  적토(赤土) · 녹청(綠靑) · 황토(黃土)
+  ─────────────────────────────────────
   */
   :root {
-    --paper:   #F4EDE2;   /* 한지 베이지 */
-    --ink:     #28211C;   /* 먹빛 다크브라운 */
-    --rust:    #A85640;   /* 적토 — 주조 액센트 */
-    --rust-lt: #C4714F;   /* 밝은 적토 */
-    --sage:    #6E7E68;   /* 녹청 */
-    --ochre:   #B8882A;   /* 황토 */
-    --dust:    #C2B4A4;   /* 무채 따뜻한 그레이 */
-    --light:   #EBE3D8;   /* 섹션 구분 밝은 배경 */
-    --border:  rgba(40,33,28,0.1);
-    --ease:    cubic-bezier(0.16, 1, 0.3, 1);
+    --paper:  #F4EDE2;
+    --ink:    #28211C;
+    --rust:   #A85640;
+    --rust-l: #C4714F;
+    --sage:   #6E7E68;
+    --ochre:  #B8882A;
+    --dust:   #B0A396;
+    --light:  #EBE3D8;
+    --border: rgba(40,33,28,0.1);
+    --ease:   cubic-bezier(0.16,1,0.3,1);
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Pretendard', -apple-system, sans-serif;
-    font-weight: 400;
-    background: var(--paper);
-    color: var(--ink);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Pretendard',-apple-system,sans-serif;
+    font-weight:400;
+    background:var(--paper);
+    color:var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
   }
 
   /* ── 공통 ── */
-  .label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--dust);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 1rem;
+  .label{
+    font-size:0.68rem;font-weight:500;
+    letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--dust);
+    display:flex;align-items:center;gap:0.75rem;
+    margin-bottom:0.9rem;
   }
-  .label::before {
-    content: '';
-    display: block;
-    width: 20px;
-    height: 1.5px;
-    background: var(--rust);
-    flex-shrink: 0;
+  .label::before{
+    content:'';display:block;
+    width:18px;height:1.5px;background:var(--rust);flex-shrink:0;
   }
-  h2.heading {
-    font-size: clamp(2rem, 3.5vw, 3.2rem);
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+  .heading{
+    font-size:clamp(1.9rem,3.2vw,3rem);
+    font-weight:600;line-height:1.15;letter-spacing:-0.02em;
   }
 
   /* ── NAV ── */
-  nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 200;
-    padding: 1.6rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.45s var(--ease);
+  nav{
+    position:fixed;inset:0 0 auto 0;z-index:200;
+    padding:1.6rem 4rem;
+    display:flex;justify-content:space-between;align-items:center;
+    transition:all 0.45s var(--ease);
   }
-  nav.scrolled {
-    background: rgba(244,237,226,0.94);
-    backdrop-filter: blur(16px);
-    padding: 0.9rem 4rem;
-    box-shadow: 0 1px 0 var(--border);
+  nav.sc{
+    background:rgba(244,237,226,0.94);
+    backdrop-filter:blur(16px);
+    padding:0.9rem 4rem;
+    box-shadow:0 1px 0 var(--border);
   }
-  .nav-logo {
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-decoration: none;
-    color: var(--ink);
-    text-transform: uppercase;
+  .nav-logo{
+    font-size:0.82rem;font-weight:600;
+    letter-spacing:0.14em;text-decoration:none;
+    color:var(--ink);text-transform:uppercase;
   }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-decoration: none;
-    color: var(--ink);
-    opacity: 0.45;
-    transition: opacity 0.25s;
-    text-transform: uppercase;
+  .nav-links{display:flex;gap:2.4rem;list-style:none;}
+  .nav-links a{
+    font-size:0.7rem;font-weight:500;
+    letter-spacing:0.12em;text-decoration:none;
+    color:var(--ink);opacity:0.45;
+    transition:opacity 0.25s;text-transform:uppercase;
   }
-  .nav-links a:hover { opacity: 1; }
+  .nav-links a:hover{opacity:1;}
 
   /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--ink);
-    overflow: hidden;
-    position: relative;
+  #hero{
+    min-height:100vh;
+    display:grid;grid-template-columns:1fr 1fr;
+    background:var(--ink);overflow:hidden;position:relative;
   }
-  .hero-l {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 5rem 4.5rem 5.5rem;
-    position: relative;
-    z-index: 2;
+  .hero-l{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:5rem 4.5rem 5.5rem;
+    position:relative;z-index:2;
   }
-  .hero-label {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--rust-lt);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: up 0.9s 0.35s var(--ease) forwards;
+  .h-label{
+    font-size:0.68rem;font-weight:500;
+    letter-spacing:0.24em;text-transform:uppercase;
+    color:var(--rust-l);margin-bottom:2rem;
+    opacity:0;animation:up .9s .35s var(--ease) forwards;
   }
-  .hero-kr {
-    font-size: clamp(3.8rem, 7vw, 6.5rem);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: #fff;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: up 1s 0.5s var(--ease) forwards;
+  .h-kr{
+    font-size:clamp(3.8rem,7vw,6.5rem);
+    font-weight:600;line-height:1;letter-spacing:-0.03em;
+    color:#fff;margin-bottom:.5rem;
+    opacity:0;animation:up 1s .5s var(--ease) forwards;
   }
-  .hero-en {
-    font-size: clamp(0.9rem, 1.4vw, 1.2rem);
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.22);
-    margin-bottom: 2.8rem;
-    opacity: 0;
-    animation: up 0.9s 0.65s var(--ease) forwards;
+  .h-en{
+    font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:400;
+    letter-spacing:0.22em;text-transform:uppercase;
+    color:rgba(255,255,255,.22);margin-bottom:2.8rem;
+    opacity:0;animation:up .9s .65s var(--ease) forwards;
   }
-  .hero-bar {
-    width: 36px; height: 1.5px;
-    background: var(--rust);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: bar 0.7s 0.85s var(--ease) forwards;
+  .h-bar{
+    width:36px;height:1.5px;background:var(--rust);margin-bottom:2rem;
+    opacity:0;animation:bar .7s .85s var(--ease) forwards;
   }
-  .hero-sub {
-    font-size: 0.9rem;
-    font-weight: 400;
-    line-height: 1.9;
-    color: rgba(255,255,255,0.42);
-    max-width: 260px;
-    margin-bottom: 3rem;
-    word-break: keep-all;
-    opacity: 0;
-    animation: up 0.9s 1s var(--ease) forwards;
+  .h-sub{
+    font-size:.9rem;font-weight:400;line-height:1.9;
+    color:rgba(255,255,255,.42);max-width:260px;margin-bottom:3rem;
+    word-break:keep-all;
+    opacity:0;animation:up .9s 1s var(--ease) forwards;
   }
-  .hero-btns {
-    display: flex; gap: 0.9rem;
-    opacity: 0;
-    animation: up 0.9s 1.15s var(--ease) forwards;
+  .h-btns{
+    display:flex;gap:.9rem;
+    opacity:0;animation:up .9s 1.15s var(--ease) forwards;
   }
-  .btn {
-    display: inline-block;
-    padding: 0.78rem 2rem;
-    font-family: 'Pretendard', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.3s var(--ease);
-    border: none; cursor: pointer;
+  .btn{
+    display:inline-block;padding:.78rem 2rem;
+    font-family:'Pretendard',sans-serif;
+    font-size:.72rem;font-weight:500;
+    letter-spacing:.16em;text-decoration:none;text-transform:uppercase;
+    transition:all .3s var(--ease);border:none;cursor:pointer;
   }
-  .btn-rust { background: var(--rust); color: #fff; }
-  .btn-rust:hover { background: var(--rust-lt); transform: translateY(-2px); }
-  .btn-ghost {
-    border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.6);
-    background: transparent;
+  .btn-r{background:var(--rust);color:#fff;}
+  .btn-r:hover{background:var(--rust-l);transform:translateY(-2px);}
+  .btn-g{
+    border:1px solid rgba(255,255,255,.2);
+    color:rgba(255,255,255,.6);background:transparent;
   }
-  .btn-ghost:hover {
-    border-color: rgba(255,255,255,0.6);
-    color: #fff;
-    transform: translateY(-2px);
+  .btn-g:hover{border-color:rgba(255,255,255,.6);color:#fff;transform:translateY(-2px);}
+
+  .hero-r{position:relative;overflow:hidden;}
+  .hero-r::before{
+    content:'';position:absolute;inset:0;z-index:1;
+    background:linear-gradient(to right,var(--ink) 0%,rgba(40,33,28,.45) 35%,transparent 65%);
+  }
+  .hero-r img{
+    width:100%;height:100%;object-fit:cover;object-position:center top;
+    filter:brightness(.7) saturate(.9);
+    opacity:0;transform:scale(1.06);
+    animation:imgIn 1.4s .2s var(--ease) forwards;
+  }
+  .scroll-h{
+    position:absolute;bottom:2.8rem;right:3rem;
+    display:flex;flex-direction:column;align-items:center;gap:.7rem;
+    z-index:3;opacity:0;animation:fi 1s 2s forwards;
+  }
+  .scroll-h span{
+    font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(255,255,255,.3);writing-mode:vertical-rl;
+  }
+  .s-line{
+    width:1px;height:44px;background:rgba(255,255,255,.12);
+    position:relative;overflow:hidden;
+  }
+  .s-line::after{
+    content:'';position:absolute;top:-100%;width:100%;height:100%;
+    background:var(--rust);animation:drop 1.6s 2.2s infinite;
   }
 
-  .hero-r {
-    position: relative; overflow: hidden;
-  }
-  .hero-r::before {
-    content: '';
-    position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(
-      to right,
-      var(--ink) 0%,
-      rgba(40,33,28,0.5) 35%,
-      transparent 65%
-    );
-  }
-  .hero-r img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center top;
-    filter: brightness(0.7) saturate(0.9);
-    opacity: 0; transform: scale(1.06);
-    animation: imgIn 1.4s 0.2s var(--ease) forwards;
-  }
-  /* 우측 하단 스크롤 힌트 */
-  .scroll-hint {
-    position: absolute;
-    bottom: 2.8rem; right: 3rem;
-    display: flex; flex-direction: column;
-    align-items: center; gap: 0.7rem;
-    z-index: 3;
-    opacity: 0; animation: fadein 1s 2s forwards;
-  }
-  .scroll-hint span {
-    font-size: 0.6rem; font-weight: 500;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    writing-mode: vertical-rl;
-  }
-  .scroll-line {
-    width: 1px; height: 44px;
-    background: rgba(255,255,255,0.12);
-    position: relative; overflow: hidden;
-  }
-  .scroll-line::after {
-    content: ''; position: absolute;
-    top: -100%; width: 100%; height: 100%;
-    background: var(--rust);
-    animation: drop 1.6s 2.2s infinite;
-  }
-
-  @keyframes up   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
-  @keyframes fadein{ to{opacity:1} }
-  @keyframes imgIn{ to{opacity:1;transform:scale(1)} }
-  @keyframes bar  { from{opacity:0;width:0} to{opacity:1;width:36px} }
-  @keyframes drop { to{top:200%} }
+  @keyframes up  {from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+  @keyframes fi  {to{opacity:1}}
+  @keyframes imgIn{to{opacity:1;transform:scale(1)}}
+  @keyframes bar {from{opacity:0;width:0}to{opacity:1;width:36px}}
+  @keyframes drop{to{top:200%}}
 
   /* ── MARQUEE ── */
-  .mq {
-    background: var(--rust);
-    padding: 0.85rem 0; overflow: hidden;
+  .mq{background:var(--rust);padding:.85rem 0;overflow:hidden;}
+  .mq-t{display:flex;width:max-content;animation:mq 30s linear infinite;}
+  .mq-i{
+    font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(255,255,255,.9);padding:0 2.2rem;white-space:nowrap;
+    display:flex;align-items:center;gap:2.2rem;
   }
-  .mq-track {
-    display: flex; width: max-content;
-    animation: mq 28s linear infinite;
-  }
-  .mq-item {
-    font-size: 0.68rem; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.9);
-    padding: 0 2.2rem; white-space: nowrap;
-    display: flex; align-items: center; gap: 2.2rem;
-  }
-  .mq-item::after { content: '·'; opacity: 0.5; }
-  @keyframes mq { to{ transform: translateX(-50%) } }
+  .mq-i::after{content:'·';opacity:.5;}
+  @keyframes mq{to{transform:translateX(-50%)}}
+
+  /* ── 섹션 공통 ── */
+  .sec{padding:7rem 5rem;}
+  .sec-alt{background:var(--light);}
+  .sec-dark{background:var(--ink);}
+  .sec-sage{background:var(--sage);}
 
   /* ── STATEMENT ── */
-  #statement {
-    background: var(--light);
-    padding: 9rem 5rem;
-    position: relative; overflow: hidden;
+  #statement{padding:9rem 5rem;background:var(--light);position:relative;overflow:hidden;}
+  .stmt-deco{
+    position:absolute;right:3rem;bottom:-3rem;
+    font-size:22rem;font-weight:700;
+    color:rgba(40,33,28,.04);line-height:1;
+    user-select:none;pointer-events:none;letter-spacing:-.05em;
   }
-  .stmt-deco {
-    position: absolute;
-    right: 3rem; bottom: -3rem;
-    font-size: 22rem; font-weight: 700;
-    color: rgba(40,33,28,0.04);
-    line-height: 1; user-select: none; pointer-events: none;
-    letter-spacing: -0.05em;
+  .stmt-in{max-width:800px;margin:0 auto;position:relative;z-index:1;}
+  .stmt-q{
+    font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:500;
+    line-height:1.85;color:var(--ink);
+    margin:2rem 0 3rem;padding-left:2rem;
+    border-left:2.5px solid var(--rust);word-break:keep-all;
   }
-  .stmt-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-  .stmt-quote {
-    font-size: clamp(1.35rem, 2.5vw, 2rem);
-    font-weight: 500;
-    line-height: 1.85;
-    color: var(--ink);
-    margin: 2rem 0 3rem;
-    padding-left: 2rem;
-    border-left: 2.5px solid var(--rust);
-    word-break: keep-all;
-  }
-  .stmt-body {
-    font-size: 0.95rem;
-    font-weight: 400;
-    line-height: 2.3;
-    color: rgba(40,33,28,0.62);
-    word-break: keep-all;
+  .stmt-b{
+    font-size:.95rem;font-weight:400;line-height:2.3;
+    color:rgba(40,33,28,.62);word-break:keep-all;
   }
 
   /* ── WORKS ── */
-  #works { padding: 7rem 4rem; background: var(--paper); }
-  .works-hd {
-    display: flex; justify-content: space-between;
-    align-items: flex-end; margin-bottom: 3rem;
-    flex-wrap: wrap; gap: 1.5rem;
+  #works{padding:7rem 4rem;background:var(--paper);}
+  .works-hd{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:2.5rem;flex-wrap:wrap;gap:1.5rem;
   }
-  .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .fb {
-    font-size: 0.7rem; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 0.48rem 1.3rem;
-    border: 1px solid var(--border);
-    background: transparent; cursor: pointer;
-    transition: all 0.25s; color: var(--ink);
-    font-family: 'Pretendard', sans-serif;
+  .works-note{
+    font-size:.8rem;font-weight:400;color:var(--dust);
+    margin-bottom:2rem;
+    padding:.9rem 1.4rem;
+    border:1px dashed var(--border);
+    background:rgba(40,33,28,.02);
+    word-break:keep-all;line-height:1.7;
   }
-  .fb.on, .fb:hover {
-    background: var(--ink); color: var(--paper);
-    border-color: var(--ink);
+  .works-note strong{color:var(--rust);font-weight:500;}
+  .works-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
   }
-  .works-grid { columns: 3; column-gap: 1rem; }
-  .wcard {
-    break-inside: avoid; margin-bottom: 1rem;
-    position: relative; overflow: hidden; cursor: pointer;
-    background: var(--light);
+  .wcard{
+    aspect-ratio:1;background:var(--light);
+    position:relative;overflow:hidden;cursor:default;
+    display:flex;flex-direction:column;
+    justify-content:flex-end;
   }
-  .wcard img {
-    width: 100%; height: auto; display: block;
-    transition: transform 0.6s var(--ease);
+  .wcard-img{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    transition:transform .6s var(--ease);
   }
-  .wcard-ov {
-    position: absolute; inset: 0;
-    background: linear-gradient(160deg, transparent 30%, rgba(40,33,28,0.88) 100%);
-    opacity: 0; transition: opacity 0.35s;
-    display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 1.4rem;
+  .wcard:hover .wcard-img{transform:scale(1.05);}
+  .wcard-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,transparent 30%,rgba(40,33,28,.85) 100%);
+    opacity:0;transition:opacity .35s;
+    display:flex;flex-direction:column;
+    justify-content:flex-end;padding:1.4rem;
   }
-  .wcard:hover img { transform: scale(1.04); }
-  .wcard:hover .wcard-ov { opacity: 1; }
-  .wc-t {
-    font-size: 0.9rem; font-weight: 500;
-    color: #fff; margin-bottom: 0.2rem; line-height: 1.4;
+  .wcard:hover .wcard-overlay{opacity:1;}
+  .wc-t{font-size:.88rem;font-weight:500;color:#fff;margin-bottom:.2rem;line-height:1.4;}
+  .wc-m{font-size:.65rem;font-weight:400;letter-spacing:.08em;color:rgba(255,255,255,.5);}
+  /* 이미지 없는 카드 */
+  .wcard-empty{
+    aspect-ratio:1;background:var(--light);
+    border:1px dashed var(--border);
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:.6rem;
+    padding:1.5rem;text-align:center;
   }
-  .wc-m {
-    font-size: 0.68rem; font-weight: 400;
-    letter-spacing: 0.08em; color: rgba(255,255,255,0.5);
+  .wcard-empty .we-num{
+    font-size:1.8rem;font-weight:600;color:var(--border);line-height:1;
   }
-  .works-more {
-    text-align: center; margin-top: 3.5rem;
+  .wcard-empty .we-t{
+    font-size:.82rem;font-weight:500;color:var(--ink);line-height:1.4;
   }
-  .works-more a {
-    font-size: 0.72rem; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink); text-decoration: none;
-    border-bottom: 1.5px solid var(--rust);
-    padding-bottom: 0.25rem;
-    transition: color 0.25s, border-color 0.25s;
+  .wcard-empty .we-s{
+    font-size:.68rem;font-weight:400;color:var(--dust);
   }
-  .works-more a:hover { color: var(--rust); }
 
-  /* ── STATS ── */
-  .stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    background: var(--ink);
+  /* ── EXHIBITIONS ── */
+  #exhibitions{padding:7rem 5rem;background:var(--ink);}
+  #exhibitions .label{color:rgba(255,255,255,.35);}
+  #exhibitions .label::before{background:rgba(255,255,255,.3);}
+  #exhibitions .heading{color:#fff;margin-bottom:4rem;}
+  .ex-tabs{
+    display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem;
   }
-  .stat {
-    padding: 3.5rem 3.5rem;
-    border-right: 1px solid rgba(255,255,255,0.06);
-    display: flex; flex-direction: column; gap: 0.5rem;
+  .ex-tab{
+    font-size:.68rem;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;
+    padding:.42rem 1.2rem;
+    border:1px solid rgba(255,255,255,.15);
+    background:transparent;cursor:pointer;
+    transition:all .25s;color:rgba(255,255,255,.5);
+    font-family:'Pretendard',sans-serif;
   }
-  .stat:last-child { border-right: none; }
-  .stat-n {
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 600; color: var(--rust-lt); line-height: 1;
-    letter-spacing: -0.03em;
+  .ex-tab.on,.ex-tab:hover{
+    background:var(--rust);color:#fff;border-color:var(--rust);
   }
-  .stat-l {
-    font-size: 0.68rem; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.28);
+  .ex-list{display:none;}
+  .ex-list.on{display:block;}
+  .ex-item{
+    display:flex;gap:2rem;align-items:baseline;
+    padding:1.1rem 0;border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  .ex-item:first-child{border-top:1px solid rgba(255,255,255,.07);}
+  .ex-type{
+    font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:.25rem .7rem;border:1px solid;flex-shrink:0;
+    min-width:52px;text-align:center;
+  }
+  .ex-type.solo{color:var(--rust-l);border-color:var(--rust-l);}
+  .ex-type.group{color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.2);}
+  .ex-type.invited{color:var(--ochre);border-color:var(--ochre);}
+  .ex-title{
+    font-size:.9rem;font-weight:500;color:#fff;flex:1;line-height:1.5;
+  }
+  .ex-venue{
+    font-size:.75rem;font-weight:400;color:rgba(255,255,255,.4);
+    flex-shrink:0;text-align:right;line-height:1.5;
+  }
+
+  /* ── AWARDS & PROJECTS ── */
+  #awards{
+    display:grid;grid-template-columns:1fr 1fr;
+    background:var(--light);
+  }
+  .aw-l,.aw-r{padding:6rem 5rem;}
+  .aw-l{border-right:1px solid var(--border);}
+  .ap-row{
+    display:flex;gap:1.5rem;align-items:flex-start;
+    padding:1.1rem 0;border-bottom:1px solid var(--border);
+  }
+  .ap-row:first-of-type{border-top:1px solid var(--border);}
+  .ap-year{
+    font-size:.65rem;font-weight:600;letter-spacing:.12em;
+    color:var(--rust);min-width:40px;padding-top:.1rem;
+  }
+  .ap-text{
+    font-size:.85rem;font-weight:400;line-height:1.7;
+    color:rgba(40,33,28,.75);word-break:keep-all;
   }
 
   /* ── ABOUT ── */
-  #about { display: grid; grid-template-columns: 1fr 1fr; }
-  .about-l {
-    background: var(--paper); padding: 7rem 5rem;
-    display: flex; flex-direction: column;
-    justify-content: center; position: relative; overflow: hidden;
+  #about{display:grid;grid-template-columns:1fr 1fr;}
+  .ab-l{
+    background:var(--paper);padding:7rem 5rem;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;overflow:hidden;
   }
-  .about-l-deco {
-    position: absolute; bottom: -1.5rem; right: -2rem;
-    font-size: 14rem; font-weight: 700; line-height: 1;
-    color: rgba(40,33,28,0.04); user-select: none; pointer-events: none;
+  .ab-deco{
+    position:absolute;bottom:-1.5rem;right:-2rem;
+    font-size:14rem;font-weight:700;line-height:1;
+    color:rgba(40,33,28,.04);user-select:none;pointer-events:none;
   }
-  .about-l .heading { margin-bottom: 0.4rem; }
-  .about-en {
-    font-size: 0.82rem; font-weight: 500;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--dust); margin-bottom: 2.5rem;
+  .ab-l .heading{margin-bottom:.4rem;}
+  .ab-en{
+    font-size:.8rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--dust);margin-bottom:2.5rem;
   }
-  .about-bar { width: 36px; height: 2px; background: var(--rust); margin-bottom: 2.5rem; }
-  .about-bio {
-    font-size: 0.9rem; font-weight: 400;
-    line-height: 2.2; color: rgba(40,33,28,0.65);
-    word-break: keep-all; position: relative; z-index: 1;
+  .ab-bar{width:36px;height:2px;background:var(--rust);margin-bottom:2.5rem;}
+  .ab-bio{
+    font-size:.9rem;font-weight:400;line-height:2.2;
+    color:rgba(40,33,28,.65);word-break:keep-all;position:relative;z-index:1;
   }
+  .ab-info{
+    margin-top:2.5rem;display:flex;flex-direction:column;gap:.7rem;
+  }
+  .ab-info-row{
+    display:flex;gap:1rem;font-size:.8rem;align-items:baseline;
+  }
+  .ab-info-key{
+    font-weight:600;color:var(--rust);min-width:36px;
+    letter-spacing:.05em;font-size:.72rem;
+    text-transform:uppercase;
+  }
+  .ab-info-val{font-weight:400;color:rgba(40,33,28,.7);}
 
-  .about-r {
-    background: var(--sage);
-    padding: 7rem 5rem;
-    display: flex; flex-direction: column; justify-content: center;
+  .ab-r{
+    background:var(--sage);padding:7rem 5rem;
+    display:flex;flex-direction:column;justify-content:center;
   }
-  .about-r .label { color: rgba(255,255,255,0.45); }
-  .about-r .label::before { background: rgba(255,255,255,0.5); }
-  .about-r .heading { color: #fff; font-size: 1.3rem; margin-bottom: 2.5rem; }
-  .arow {
-    display: flex; gap: 1.6rem; align-items: flex-start;
-    padding: 1.15rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+  .ab-r .label{color:rgba(255,255,255,.35);}
+  .ab-r .label::before{background:rgba(255,255,255,.4);}
+  .ab-r .heading{color:#fff;font-size:1.2rem;margin-bottom:2rem;}
+  .act-row{
+    display:flex;gap:1.6rem;align-items:flex-start;
+    padding:1.1rem 0;border-bottom:1px solid rgba(255,255,255,.1);
   }
-  .arow:first-of-type { border-top: 1px solid rgba(255,255,255,0.1); }
-  .atag {
-    font-size: 0.62rem; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); min-width: 44px;
-    padding-top: 0.1rem;
+  .act-row:first-of-type{border-top:1px solid rgba(255,255,255,.1);}
+  .act-tag{
+    font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+    color:rgba(255,255,255,.45);min-width:44px;padding-top:.12rem;
   }
-  .atext {
-    font-size: 0.83rem; font-weight: 400;
-    line-height: 1.75; color: rgba(255,255,255,0.75);
-    word-break: keep-all;
+  .act-text{
+    font-size:.83rem;font-weight:400;line-height:1.75;
+    color:rgba(255,255,255,.75);word-break:keep-all;
   }
 
   /* ── CONNECT ── */
-  #connect {
-    background: var(--paper);
-    padding: 7rem 5rem;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between;
-    align-items: center; flex-wrap: wrap; gap: 4rem;
+  #connect{
+    padding:7rem 5rem;background:var(--paper);
+    border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:4rem;
   }
-  .conn-title {
-    font-size: clamp(1.8rem, 3.5vw, 3rem);
-    font-weight: 600; line-height: 1.25;
-    letter-spacing: -0.02em; color: var(--ink);
+  .conn-title{
+    font-size:clamp(1.8rem,3.5vw,3rem);
+    font-weight:600;line-height:1.25;letter-spacing:-.02em;
   }
-  .conn-cards { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .ccard {
-    display: flex; flex-direction: column; gap: 0.55rem;
-    padding: 1.8rem 2.2rem; min-width: 162px;
-    border: 1px solid var(--border);
-    text-decoration: none; background: transparent;
-    transition: all 0.3s var(--ease); position: relative; overflow: hidden;
+  .conn-cards{display:flex;gap:1rem;flex-wrap:wrap;}
+  .ccard{
+    display:flex;flex-direction:column;gap:.55rem;
+    padding:1.8rem 2.2rem;min-width:162px;
+    border:1px solid var(--border);
+    text-decoration:none;background:transparent;
+    transition:all .3s var(--ease);
+    position:relative;overflow:hidden;
   }
-  .ccard::after {
-    content: ''; position: absolute; inset: 0;
-    background: var(--ink); transform: scaleX(0);
-    transform-origin: left; transition: transform 0.35s var(--ease); z-index: 0;
+  .ccard::after{
+    content:'';position:absolute;inset:0;background:var(--ink);
+    transform:scaleX(0);transform-origin:left;
+    transition:transform .35s var(--ease);z-index:0;
   }
-  .ccard:hover::after { transform: scaleX(1); }
-  .ccard:hover { border-color: var(--ink); }
-  .ccard:hover .cp { color: rgba(255,255,255,0.4); }
-  .ccard:hover .ch { color: #fff; }
-  .ccard:hover .ca { color: rgba(255,255,255,0.5); transform: translate(3px,-3px); }
-  .cp {
-    font-size: 0.63rem; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--dust); position: relative; z-index: 1; transition: color 0.3s;
-  }
-  .ch {
-    font-size: 0.85rem; font-weight: 400;
-    color: var(--ink); position: relative; z-index: 1; transition: color 0.3s;
-  }
-  .ca {
-    font-size: 1rem; color: var(--dust);
-    align-self: flex-end; position: relative; z-index: 1;
-    transition: color 0.3s, transform 0.3s;
-  }
+  .ccard:hover::after{transform:scaleX(1);}
+  .ccard:hover{border-color:var(--ink);}
+  .ccard:hover .cp,.ccard:hover .ca{color:rgba(255,255,255,.4);}
+  .ccard:hover .ch{color:#fff;}
+  .cp{font-size:.63rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--dust);position:relative;z-index:1;transition:color .3s;}
+  .ch{font-size:.85rem;font-weight:400;color:var(--ink);position:relative;z-index:1;transition:color .3s;}
+  .ca{font-size:1rem;color:var(--dust);align-self:flex-end;position:relative;z-index:1;transition:color .3s,transform .3s;}
+  .ccard:hover .ca{transform:translate(3px,-3px);}
 
   /* ── FOOTER ── */
-  footer {
-    background: var(--ink); color: rgba(244,237,226,0.22);
-    padding: 2rem 4rem;
-    display: flex; justify-content: space-between;
-    align-items: center; flex-wrap: wrap; gap: 0.5rem;
-    font-size: 0.65rem; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
+  footer{
+    background:var(--ink);color:rgba(244,237,226,.22);
+    padding:2rem 4rem;
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:.5rem;
+    font-size:.65rem;font-weight:500;
+    letter-spacing:.12em;text-transform:uppercase;
   }
-
-  /* ── LIGHTBOX ── */
-  .lbox {
-    position: fixed; inset: 0; z-index: 999;
-    background: rgba(18,14,12,0.96);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.4s; padding: 3rem;
-  }
-  .lbox.open { opacity: 1; pointer-events: all; }
-  .lbox-inner {
-    display: flex; gap: 4rem; align-items: center;
-    max-width: 1020px; width: 100%;
-  }
-  .lbox img {
-    max-height: 78vh; max-width: 52%;
-    object-fit: contain;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-  }
-  .lbox-text { color: #fff; }
-  .lbox-series {
-    font-size: 0.65rem; font-weight: 500;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--rust-lt); margin-bottom: 1rem;
-  }
-  .lbox-title {
-    font-size: clamp(1.3rem, 2vw, 2rem);
-    font-weight: 600; line-height: 1.35; margin-bottom: 1.8rem;
-  }
-  .lbox-detail {
-    font-size: 0.82rem; font-weight: 400;
-    line-height: 2.2; color: rgba(255,255,255,0.4);
-  }
-  .lbox-link {
-    display: inline-block; margin-top: 2rem;
-    font-size: 0.68rem; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.3); text-decoration: none;
-    transition: color 0.3s;
-  }
-  .lbox-link:hover { color: var(--rust-lt); }
-  .lbox-close {
-    position: fixed; top: 2rem; right: 2.5rem;
-    background: none; border: none;
-    font-family: 'Pretendard', sans-serif;
-    font-size: 0.68rem; font-weight: 500;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35); cursor: pointer;
-    transition: color 0.3s;
-  }
-  .lbox-close:hover { color: #fff; }
 
   /* ── SCROLL REVEAL ── */
-  .rv {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
-  }
-  .rv.on { opacity: 1; transform: none; }
-  .rv-d1 { transition-delay: 0.1s; }
-  .rv-d2 { transition-delay: 0.2s; }
+  .rv{opacity:0;transform:translateY(32px);transition:opacity .85s var(--ease),transform .85s var(--ease);}
+  .rv.on{opacity:1;transform:none;}
+  .rv-d1{transition-delay:.1s;}.rv-d2{transition-delay:.2s;}
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    #hero { grid-template-columns: 1fr; }
-    .hero-r { display: none; }
-    .hero-l { padding: 9rem 3rem 5rem; justify-content: center; }
-    #statement { padding: 7rem 3rem; }
-    #works { padding: 5rem 2.5rem; }
-    .works-grid { columns: 2; }
-    #about { grid-template-columns: 1fr; }
-    .about-l, .about-r { padding: 5rem 3rem; }
-    .stats { grid-template-columns: repeat(3, 1fr); }
-    #connect { padding: 5rem 3rem; }
-    nav { padding: 1.4rem 2.5rem; }
-    nav.scrolled { padding: 0.9rem 2.5rem; }
+  @media(max-width:1024px){
+    #hero{grid-template-columns:1fr;}
+    .hero-r{display:none;}
+    .hero-l{padding:9rem 3rem 5rem;justify-content:center;}
+    .sec{padding:5rem 3rem;}
+    #statement{padding:7rem 3rem;}
+    #works{padding:5rem 2.5rem;}
+    .works-grid{grid-template-columns:repeat(2,1fr);}
+    #exhibitions{padding:5rem 3rem;}
+    #awards{grid-template-columns:1fr;}
+    .aw-l{border-right:none;border-bottom:1px solid var(--border);}
+    .aw-l,.aw-r{padding:4.5rem 3rem;}
+    #about{grid-template-columns:1fr;}
+    .ab-l,.ab-r{padding:5rem 3rem;}
+    #connect{padding:5rem 3rem;}
+    nav{padding:1.4rem 2.5rem;}
+    nav.sc{padding:.9rem 2.5rem;}
   }
-  @media (max-width: 640px) {
-    nav { padding: 1.2rem 1.5rem; }
-    nav.scrolled { padding: 0.8rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero-l { padding: 7rem 1.5rem 4rem; }
-    #statement { padding: 5rem 1.5rem; }
-    #works { padding: 4rem 1.5rem; }
-    .works-grid { columns: 1; }
-    .about-l, .about-r { padding: 4rem 1.5rem; }
-    .stats { grid-template-columns: 1fr; }
-    .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    #connect { padding: 4rem 1.5rem; flex-direction: column; }
-    .conn-cards { flex-direction: column; width: 100%; }
-    footer { padding: 1.5rem; flex-direction: column; text-align: center; }
-    .lbox { padding: 1.5rem; overflow-y: auto; align-items: flex-start; }
-    .lbox-inner { flex-direction: column; gap: 2rem; }
-    .lbox img { max-width: 100%; max-height: 55vw; }
+  @media(max-width:640px){
+    nav{padding:1.2rem 1.5rem;}nav.sc{padding:.8rem 1.5rem;}
+    .nav-links{display:none;}
+    .hero-l{padding:7rem 1.5rem 4rem;}
+    #statement{padding:5rem 1.5rem;}
+    #works{padding:4rem 1.5rem;}
+    .works-grid{grid-template-columns:1fr;}
+    #exhibitions{padding:4rem 1.5rem;}
+    .aw-l,.aw-r{padding:4rem 1.5rem;}
+    .ab-l,.ab-r{padding:4rem 1.5rem;}
+    #connect{padding:4rem 1.5rem;flex-direction:column;}
+    .conn-cards{flex-direction:column;width:100%;}
+    footer{padding:1.5rem;flex-direction:column;text-align:center;}
+    .ex-item{flex-wrap:wrap;gap:.6rem;}
+    .ex-venue{text-align:left;}
   }
 </style>
 </head>
 <body>
+
+<!-- data.js 로드 -->
+<script src="./data.js"></script>
 
 <!-- NAV -->
 <nav id="nav">
@@ -603,6 +492,7 @@
   <ul class="nav-links">
     <li><a href="#statement">Statement</a></li>
     <li><a href="#works">Works</a></li>
+    <li><a href="#exhibitions">CV</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#connect">Contact</a></li>
   </ul>
@@ -611,46 +501,54 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-l">
-    <p class="hero-label">Minhwa-based Contemporary Painting</p>
-    <h1 class="hero-kr">박기량</h1>
-    <p class="hero-en">Park Kiryang</p>
-    <div class="hero-bar"></div>
-    <p class="hero-sub">전통 민화의 조형 언어로<br>동시대의 감정을 이야기합니다</p>
-    <div class="hero-btns">
-      <a href="#works" class="btn btn-rust">Works</a>
-      <a href="#about" class="btn btn-ghost">About</a>
+    <p class="h-label">Minhwa-based Contemporary Painting</p>
+    <h1 class="h-kr">박기량</h1>
+    <p class="h-en">Park Kiryang</p>
+    <div class="h-bar"></div>
+    <p class="h-sub">전통 민화의 조형 언어로<br>동시대의 감정을 이야기합니다</p>
+    <div class="h-btns">
+      <a href="#works" class="btn btn-r">Works</a>
+      <a href="#exhibitions" class="btn btn-g">CV</a>
     </div>
   </div>
   <div class="hero-r">
-    <img src="https://og-data.s3.amazonaws.com/media/artworks/half/A2702/A2702-0006.jpg"
-         alt="파경破鏡 — 박기량, 2024" loading="eager">
+    <!--
+      작품 대표 이미지를 여기에 넣으세요.
+      GitHub에 images/ 폴더 만들고 파일 올린 뒤
+      아래 src 경로를 ./images/hero.jpg 로 변경하면 됩니다.
+    -->
+    <img src="./images/hero.jpg" alt="박기량 대표 작품"
+      onerror="this.parentElement.style.background='#3A2E28';this.style.display='none'">
   </div>
-  <div class="scroll-hint">
+  <div class="scroll-h">
     <span>Scroll</span>
-    <div class="scroll-line"></div>
+    <div class="s-line"></div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="mq">
-  <div class="mq-track" id="mqTrack"></div>
-</div>
+<div class="mq"><div class="mq-t" id="mqT"></div></div>
 
 <!-- STATEMENT -->
 <section id="statement">
   <div class="stmt-deco">感</div>
-  <div class="stmt-inner rv">
+  <div class="stmt-in rv">
     <div class="label">Artist Statement</div>
-    <blockquote class="stmt-quote">
-      쉽게 말로 설명되지 않는 감정들을<br>
-      그림이라는 장면 속에 조용히 머무르게 합니다.
+    <blockquote class="stmt-q">
+      감정이 정리되지 않는 순간을<br>
+      장면으로 그리는 회화 작가입니다.
     </blockquote>
-    <p class="stmt-body">
-      전통 민화의 상징과 형식을 빌려, 지금 이 시대를 살아가는 우리의 감정과 기억, 관계를 새롭게 엮어 나가고 있습니다.
-      단순히 옛 것을 재현하는 것이 아니라, 그 안에 오늘의 감정들을 차곡차곡 쌓아 새로운 민화를 만들어갑니다.<br><br>
-      작업의 중심에는 '올랑이'라는 존재가 있습니다. 사랑하는 이들을 지켜주고 싶은 마음에서 태어난 이 작은 캐릭터는,
-      어느 순간 감정을 품고 나 자신을 비추는 또 하나의 자아로 확장됩니다. &lt;파경&gt;에선 관계의 균열을,
-      &lt;나의 연대기&gt;에선 개인의 기억과 시간을, &lt;부활&gt;에선 성장과 회복의 순간을 이야기합니다.
+    <p class="stmt-b">
+      '올랑이'라는 아기 호랑이 형상의 존재를 통해 불안, 버팀, 회복과 같은 감정의 상태를 화면 안에 남깁니다.
+      장지 위에 색을 여러 겹 쌓고, 털을 한 올씩 심듯 쌓아가는 방식으로 시간과 감정의 밀도를 화면에 축적합니다.
+      작품은 하나의 의미를 제시하기보다, 관객이 자신의 감정을 발견하고 해석하는 장면으로 열려 있습니다.<br><br>
+      올랑이는 단순한 캐릭터가 아니라 그림 속에서 나를 대신 살아가는 또 하나의 자아입니다.
+      전통 민화에서 호랑이는 액운을 막고 사람을 지키는 상징적 존재였습니다.
+      나는 그 상징을 그대로 가져오되, 권위적이고 위압적인 호랑이의 모습 대신
+      나에게 위안을 주는 존재인 아이들의 모습을 투영하여
+      감정을 이해하고 마음을 지켜주는 아기호랑이를 그렸습니다.<br><br>
+      <em style="font-style:normal;color:var(--rust);font-weight:500;">Keywords</em>&nbsp;&nbsp;
+      감정 / 시점 / 반복 / 밀도 / 올랑이
     </p>
   </div>
 </section>
@@ -659,68 +557,96 @@
 <section id="works">
   <div class="works-hd rv">
     <div>
-      <div class="label">Portfolio</div>
+      <div class="label">Works</div>
       <h2 class="heading">작품</h2>
     </div>
-    <div class="filter-row">
-      <button class="fb on" data-f="all">전체</button>
-      <button class="fb" data-f="올랑이">올랑이</button>
-      <button class="fb" data-f="파경">파경</button>
-      <button class="fb" data-f="부활">부활</button>
-      <button class="fb" data-f="길상">길상</button>
-    </div>
   </div>
+  <p class="works-note rv">
+    <strong>※ 이미지 추가 방법</strong> — GitHub 저장소에 <strong>images/</strong> 폴더를 만들고
+    작품 이미지를 올린 뒤, 아래 각 카드의 <strong>background-image</strong> 경로를 수정하세요.<br>
+    예: <code>background-image: url('./images/olang-01.jpg')</code>
+  </p>
   <div class="works-grid rv rv-d1" id="worksGrid"></div>
-  <div class="works-more rv rv-d2">
-    <a href="https://www.opengallery.co.kr/artist/A2702/" target="_blank" rel="noopener">
-      Open Gallery에서 전체 작품 보기 →
-    </a>
+</section>
+
+<!-- EXHIBITIONS -->
+<section id="exhibitions">
+  <div class="rv">
+    <div class="label">Exhibition History</div>
+    <h2 class="heading">전시 이력</h2>
+  </div>
+  <div class="ex-tabs rv rv-d1">
+    <button class="ex-tab on" data-y="all">전체</button>
+    <button class="ex-tab" data-y="2026">2026</button>
+    <button class="ex-tab" data-y="2025">2025</button>
+    <button class="ex-tab" data-y="2024">2024</button>
+    <button class="ex-tab" data-y="2023">2023</button>
+    <button class="ex-tab" data-y="2022">2022</button>
+    <button class="ex-tab" data-y="2021">2021</button>
+  </div>
+  <div id="exContainer" class="rv rv-d2"></div>
+</section>
+
+<!-- AWARDS & PROJECTS -->
+<section id="awards" style="background:var(--light);">
+  <div class="aw-l rv">
+    <div class="label">Awards</div>
+    <h2 class="heading" style="font-size:1.8rem;margin-bottom:2.5rem;">수상</h2>
+    <div class="ap-row"><span class="ap-year">2025</span><span class="ap-text">순천문화재단 일상문화예술실험실 공모 대상</span></div>
+    <div class="ap-row"><span class="ap-year">2025</span><span class="ap-text">제 11회 대한민국민화대전 특선</span></div>
+    <div class="ap-row"><span class="ap-year">2024</span><span class="ap-text">제 10회 대한민국민화대전 입선</span></div>
+    <div class="ap-row"><span class="ap-year">2022</span><span class="ap-text">광양문화도시센터 원님길 조성사업 공모전 최우수상</span></div>
+    <div class="ap-row"><span class="ap-year">2021</span><span class="ap-text">제 7회 대한민국민화대전 특선</span></div>
+  </div>
+  <div class="aw-r rv rv-d1">
+    <div class="label">Projects</div>
+    <h2 class="heading" style="font-size:1.8rem;margin-bottom:2.5rem;">프로젝트</h2>
+    <div class="ap-row"><span class="ap-year">2025</span><span class="ap-text">광양시특수교육지원센터 &lt;지켜주는 민화&gt; 출강</span></div>
+    <div class="ap-row"><span class="ap-year">2025</span><span class="ap-text">전남문화재단 모두의문화예술교육 &lt;마음존중 탐구생활&gt;</span></div>
+    <div class="ap-row"><span class="ap-year">2025</span><span class="ap-text">순천문화재단 일상문화예술실험실 수상작 &lt;도깨비불 밝혀라&gt;</span></div>
+    <div class="ap-row"><span class="ap-year">2025</span><span class="ap-text">순천문화재단 기획자양성과정 &lt;마음을 일궈요, 감정텃밭&gt;</span></div>
+    <div class="ap-row"><span class="ap-year">2024</span><span class="ap-text">전남문화재단 청년예술가 활동지원사업 &lt;듣는 민화, 보는 국악&gt;</span></div>
+    <div class="ap-row"><span class="ap-year">2024</span><span class="ap-text">전남문화재단 모두의문화예술교육 &lt;다문화 속 색다른 문화이야기&gt;</span></div>
+    <div class="ap-row"><span class="ap-year">2023</span><span class="ap-text">광양시 예비문화도시사업 &lt;시민궁리랩&gt; 문화원님길 참여</span></div>
+    <div class="ap-row"><span class="ap-year">2020</span><span class="ap-text">정채봉문학테마길 조성사업 '눈을 감고 보는 길' 민화 타일벽화</span></div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat rv">
-    <span class="stat-n">17+</span>
-    <span class="stat-l">작품 등록</span>
-  </div>
-  <div class="stat rv rv-d1">
-    <span class="stat-n">5</span>
-    <span class="stat-l">시리즈</span>
-  </div>
-  <div class="stat rv rv-d2">
-    <span class="stat-n">2019</span>
-    <span class="stat-l">활동 시작</span>
-  </div>
-</div>
-
 <!-- ABOUT -->
-<section id="about">
-  <div class="about-l rv">
-    <div class="about-l-deco">作</div>
+<section id="about" style="display:grid;grid-template-columns:1fr 1fr;">
+  <div class="ab-l rv">
+    <div class="ab-deco">作</div>
     <div class="label">About</div>
     <h2 class="heading">박기량</h2>
-    <p class="about-en">Park Kiryang</p>
-    <div class="about-bar"></div>
-    <p class="about-bio">
+    <p class="ab-en">Park Kiryang</p>
+    <div class="ab-bar"></div>
+    <p class="ab-bio">
       민화기반 동시대회화 작가로, 불안·위로·상처·회복·생존·자존이라는 주제를
       민화적 상징과 현대적 화면 감각으로 풀어냅니다.<br><br>
-      재료는 장지에 수간분채와 수간석채를 사용하며, 전통의 형식을 빌려 오늘을
-      살아가는 감정의 결을 기록합니다. 작가이자 기획자, 교육자로서 복합적 역할을
-      수행하며 감정 약자를 위한 예술 기획을 지향합니다.
+      전통 민화를 배우며 작업을 시작한 2018년 이후, 다양한 지원사업과 전시를 통해
+      작업의 영역을 확장해왔습니다. 작가이자 기획자, 교육자로서 복합적 역할을
+      수행하며 '작품으로 이야기하는 사람'이라는 정체성을 이어가고 있습니다.
     </p>
+    <div class="ab-info">
+      <div class="ab-info-row">
+        <span class="ab-info-key">학력</span>
+        <span class="ab-info-val">전남대학교 시각정보디자인 미술학사</span>
+      </div>
+      <div class="ab-info-row">
+        <span class="ab-info-key">소장</span>
+        <span class="ab-info-val">경상북도청, 전남문화재단 남도예술은행</span>
+      </div>
+    </div>
   </div>
-  <div class="about-r rv rv-d1">
+  <div class="ab-r rv rv-d1">
     <div class="label">Activities</div>
-    <h3 class="heading" style="font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:2rem;">활동 이력</h3>
-    <div class="arow"><span class="atag">NOW</span><span class="atext">민화기반 동시대회화 작가</span></div>
-    <div class="arow"><span class="atag">NOW</span><span class="atext">노인복지관 민화강사</span></div>
-    <div class="arow"><span class="atag">NOW</span><span class="atext">광양미술협회 사무국장</span></div>
-    <div class="arow"><span class="atag">NOW</span><span class="atext">순천문화재단 캐릭터사업 위촉작가</span></div>
-    <div class="arow"><span class="atag">기획</span><span class="atext">'민화의 정원' 전시 기획 및 마케팅 다수</span></div>
-    <div class="arow"><span class="atag">2022</span><span class="atext">예하랑 전시 기획 2회 · 시민탐구랩 원님길 프로젝트 대상</span></div>
-    <div class="arow"><span class="atag">강의</span><span class="atext">전남대학교 서비스디자인 융합연구소 협업 강의</span></div>
-    <div class="arow"><span class="atag">2019</span><span class="atext">정채봉 문학 테마길 설치 공모전 기획</span></div>
+    <h3 class="heading" style="font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:2rem;">현재 활동</h3>
+    <div class="act-row"><span class="act-tag">NOW</span><span class="act-text">한국미술협회 광양지부 14대 사무국장</span></div>
+    <div class="act-row"><span class="act-tag">NOW</span><span class="act-text">전남문화재단 남도예술은행 in 렌트 작가 선정 (2026)</span></div>
+    <div class="act-row"><span class="act-tag">강의</span><span class="act-text">노인복지관 민화강사</span></div>
+    <div class="act-row"><span class="act-tag">위촉</span><span class="act-text">순천문화재단 캐릭터사업 위촉작가</span></div>
+    <div class="act-row"><span class="act-tag">기획</span><span class="act-text">'민화의 정원' 전시 기획 및 마케팅 다수</span></div>
+    <div class="act-row"><span class="act-tag">목표</span><span class="act-text">'올랑이를 그리는 페인터 박기량'으로 국내외 미술시장에서 입지 구축</span></div>
   </div>
 </section>
 
@@ -736,136 +662,136 @@
       <span class="ch">@kiiryang</span>
       <span class="ca">↗</span>
     </a>
-    <a href="https://www.opengallery.co.kr/artist/A2702/" target="_blank" rel="noopener" class="ccard">
-      <span class="cp">Open Gallery</span>
-      <span class="ch">박기량 작가페이지</span>
-      <span class="ca">↗</span>
-    </a>
     <a href="mailto:kikiryang92@gmail.com" class="ccard">
       <span class="cp">Email</span>
       <span class="ch">kikiryang92@gmail.com</span>
       <span class="ca">↗</span>
     </a>
+    <a href="tel:01071975439" class="ccard">
+      <span class="cp">Phone</span>
+      <span class="ch">010.7197.5439</span>
+      <span class="ca">↗</span>
+    </a>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <span id="copyright"></span>
+  <span id="cr"></span>
   <span>Minhwa-based Contemporary Painting</span>
 </footer>
 
-<!-- LIGHTBOX -->
-<div class="lbox" id="lbox">
-  <button class="lbox-close" id="lboxClose">✕ Close</button>
-  <div class="lbox-inner">
-    <img id="lboxImg" src="" alt="">
-    <div class="lbox-text">
-      <p class="lbox-series" id="lboxSeries"></p>
-      <h3 class="lbox-title" id="lboxTitle"></h3>
-      <div class="lbox-detail" id="lboxDetail"></div>
-      <a id="lboxLink" href="#" target="_blank" rel="noopener" class="lbox-link">
-        Open Gallery에서 보기 →
-      </a>
-    </div>
-  </div>
-</div>
-
 <script>
-const BASE = 'https://og-data.s3.amazonaws.com/media/artworks/w_fixed/A2702/';
-const OG   = 'https://www.opengallery.co.kr/artwork/';
+/* ── 데이터 로드 (data.js 우선, 없으면 내장 데이터) ── */
+const _D = window.KIKI_DATA || { works: [], exhibitions: [] };
 
-const works = [
-  { id:'A2702-0024', title:'올랑도, 우리에게 너희를 지키는 건 약과야', size:'61×50cm (12호)', medium:'장지에 수간분채, 수간석채', series:'올랑이' },
-  { id:'A2702-0008', title:'연잎에 올랑', size:'40×40cm (8호)', medium:'장지에 수간분채, 수간석채', series:'올랑이' },
-  { id:'A2702-0006', title:'파경破鏡', size:'30×30cm (6호)', medium:'장지에 수간분채, 수간석채', year:'2024', series:'파경' },
-  { id:'A2702-0023', title:'다시, 생일2', size:'60×30cm (변형 10호)', medium:'장지에 수간분채, 수간석채', series:'부활' },
-  { id:'A2702-0016', title:'다시, 생일', size:'53×46cm (10호)', medium:'장지에 수간분채, 수간석채', series:'부활' },
-  { id:'A2702-0001', title:'부활 復活', size:'53×43cm (10호)', medium:'장지에 수간분채, 수간석채', series:'부활' },
-  { id:'A2702-0022', title:'길상이 타는 동안', size:'60×60cm (20호)', medium:'장지에 수간분채, 수간석채', series:'길상' },
-  { id:'A2702-0020', title:'길상없는 궤도', size:'60×60cm (20호)', medium:'장지에 수간분채, 수간석채', series:'길상' },
-  { id:'A2702-0021', title:'경계의 정원', size:'40×40cm (8호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0019', title:'해害항아리', size:'61×50cm (12호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0018', title:'해害항아리 이후', size:'53×41cm (10호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0017', title:'겸손', size:'50×50cm (12호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0015', title:'우주 앞에서', size:'40×53cm (10호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0014', title:'숨을 곳', size:'74×37cm (변형 12호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0013', title:'해방의 날', size:'50×50cm (12호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0011', title:'십장생도 十長生圖', size:'73×185cm (변형 80호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
-  { id:'A2702-0002', title:'자색의 서가', size:'70×50cm (20호)', medium:'장지에 수간분채, 수간석채', series:'기타' },
+/* ── 전시 데이터 ── */
+const exhibitions = _D.exhibitions.length ? _D.exhibitions : [
+  { year:2026, type:'invited', title:'〈겹과 결〉 광양미술협회 집행이사진 기획초대전', venue:'인서리01 반창고갤러리' },
+  { year:2026, type:'invited', title:'〈3℃〉 박기량 × 김설화(도예가) 듀오 초대전', venue:'인서리01 반창고갤러리' },
+  { year:2025, type:'solo',    title:'광양시의회 초대 개인전 〈보이는 의견〉', venue:'광양시의회' },
+  { year:2025, type:'invited', title:'〈민화연대기〉', venue:'전라남도청 동부청사' },
+  { year:2025, type:'invited', title:'지역작가 협업초대전 〈시간이 머문 골목〉', venue:'진도 옥주골창작소' },
+  { year:2025, type:'invited', title:'〈Hidden Catch: 꼭꼭 숨어라, 민화보일라〉', venue:'인서리01 반창고갤러리' },
+  { year:2025, type:'group',   title:'광양 국제미디어아트 페스티벌 연계 그룹전 〈여그가 여유지〉', venue:'광양' },
+  { year:2024, type:'solo',    title:'개인전 〈마주보는 소리〉', venue:'다다갤러리' },
+  { year:2024, type:'invited', title:'능가사 기획초대전 〈민화의정원展〉', venue:'고흥 능가사' },
+  { year:2024, type:'invited', title:'〈정원에 햇살이 비치면〉', venue:'전라남도교육청 광양공공도서관' },
+  { year:2024, type:'group',   title:'한국미술협회 제 25회 광양·포항 교류전', venue:'포항' },
+  { year:2024, type:'group',   title:'제 7회 남해안남중권 문화예술제 교류전', venue:'하동' },
+  { year:2024, type:'group',   title:'제 3회 영호남상생협력 화합 대축전 〈청년작가ART展〉', venue:'서울 광화문광장' },
+  { year:2024, type:'invited', title:'기획초대전 〈오색찬란전〉 〈쉬어가는자리〉 〈도심속작은갤러리〉', venue:'광양문화예술회관' },
+  { year:2024, type:'invited', title:'제 1회 한국민화교육협회 지도자 특별전', venue:'제주 루씨쏜 아틀리에' },
+  { year:2024, type:'group',   title:'아트옥션 〈아트로 놀자!〉', venue:'광양문화도시센터' },
+  { year:2023, type:'invited', title:'〈민화의 정원, 수복〉', venue:'순천문화재단 순천부읍성 남문터광장' },
+  { year:2023, type:'group',   title:'민화來용', venue:'광양 아트공간이음 외 단체전 2회' },
+  { year:2022, type:'group',   title:'전남여성작가회 정기전 남도의 꽃과 정원', venue:'목포 외 단체전 5회 이상' },
+  { year:2021, type:'solo',    title:'개인전 〈민화의 기량〉', venue:'순천 조강훈아트스튜디오' },
+  { year:2019, type:'group',   title:'민화의정원展', venue:'외 단체전 3회 이상' },
 ];
 
-function renderWorks(f) {
-  const list = f === 'all' ? works : works.filter(w => w.series === f);
-  document.getElementById('worksGrid').innerHTML = list.map(w => `
-    <div class="wcard" onclick="openLbox('${w.id}')">
-      <img src="${BASE}${w.id}.jpg" alt="${w.title}" loading="lazy">
-      <div class="wcard-ov">
-        <p class="wc-t">${w.title}</p>
-        <p class="wc-m">${w.size}${w.year ? ' · ' + w.year : ''}</p>
-      </div>
-    </div>`).join('');
+const typeLabel = { solo:'개인전', group:'단체전', invited:'초대전' };
+
+function renderEx(filter) {
+  const list = filter === 'all' ? exhibitions : exhibitions.filter(e => e.year == filter);
+  const years = [...new Set(list.map(e => e.year))].sort((a,b) => b-a);
+  let html = '';
+  years.forEach(y => {
+    const items = list.filter(e => e.year === y);
+    if (filter === 'all') {
+      html += `<div style="margin-bottom:2.5rem">
+        <p style="font-size:.72rem;font-weight:600;letter-spacing:.18em;color:var(--rust-l);margin-bottom:.8rem;text-transform:uppercase">${y}</p>`;
+    } else html += '<div>';
+    items.forEach(e => {
+      html += `<div class="ex-item">
+        <span class="ex-type ${e.type}">${typeLabel[e.type]}</span>
+        <span class="ex-title">${e.title}</span>
+        <span class="ex-venue">${e.venue}</span>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  document.getElementById('exContainer').innerHTML = html;
 }
 
-function openLbox(id) {
-  const w = works.find(x => x.id === id);
-  if (!w) return;
-  document.getElementById('lboxImg').src = BASE + id + '.jpg';
-  document.getElementById('lboxImg').alt = w.title;
-  document.getElementById('lboxSeries').textContent = w.series !== '기타' ? w.series + ' Series' : '';
-  document.getElementById('lboxTitle').textContent = w.title;
-  document.getElementById('lboxDetail').innerHTML =
-    `${w.size}<br>${w.medium}${w.year ? '<br>' + w.year : ''}<br>박기량`;
-  document.getElementById('lboxLink').href = OG + id + '/';
-  document.getElementById('lbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLbox() {
-  document.getElementById('lbox').classList.remove('open');
-  document.body.style.overflow = '';
-  setTimeout(() => { document.getElementById('lboxImg').src = ''; }, 400);
-}
-document.getElementById('lboxClose').onclick = closeLbox;
-document.getElementById('lbox').addEventListener('click', e => { if (e.target===e.currentTarget) closeLbox(); });
-document.addEventListener('keydown', e => { if (e.key==='Escape') closeLbox(); });
-
-document.querySelectorAll('.fb').forEach(btn => {
+document.querySelectorAll('.ex-tab').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+    document.querySelectorAll('.ex-tab').forEach(b => b.classList.remove('on'));
     btn.classList.add('on');
-    renderWorks(btn.dataset.f);
+    renderEx(btn.dataset.y);
   });
 });
 
+/* ── 작품 데이터 ── */
+const works = _D.works.length ? _D.works : [
+  { file:'hae-hangari.jpg',    title:'해害 항아리',                         year:2026, size:'P12',        info:'장지에 수간분채 및 과슈' },
+  { file:'hae-hangari-ihu.jpg',title:'해害 항아리 이후',                    year:2026, size:'53×41cm',    info:'장지에 수간분채, 석채 및 혼합' },
+  { file:'dasi-saengil2.jpg',  title:'다시, 생일2',                         year:2025, size:'29.7×84.1cm',info:'장지에 수간분채, 석채, 과슈 및 혼합' },
+  { file:'haebang.jpg',        title:'해방의 날',                           year:2025, size:'50×40cm',    info:'장지에 수간분채, 수간석채' },
+  { file:'jungseo.jpg',        title:'정서의 해상도',                       year:2025, size:'91×50cm',    info:'장지에 수간분채 및 혼합' },
+  { file:'sayoo.jpg',          title:'사유 思流',                           year:2025, size:'50×40cm',    info:'장지에 수간분채 및 혼합' },
+  { file:'jikyeo-olang.jpg',   title:'지켜주는 민화: 길 위에 올랑',        year:2025, size:'50×40cm',    info:'장지에 수간분채 및 혼합' },
+  { file:'hoebogui-sup.jpg',   title:'회복의 숲',                           year:2024, size:'50×70cm',    info:'장지에 수간분채 및 혼합' },
+  { file:'sumul-got.jpg',      title:'숨을 곳 (미성숙에 대한 용사)',        year:2024, size:'74×27cm',    info:'장지에 수간분채 및 과슈' },
+  { file:'dasi-saengil.jpg',   title:'다시, 생일',                          year:2024, size:'53×46cm',    info:'장지에 수간분채, 석채 및 혼합' },
+  { file:'gyeonggye.jpg',      title:'경계의 정원',                         year:2024, size:'40×40cm',    info:'장지에 수간분채 및 과슈' },
+  { file:'gilsang-gido.jpg',   title:'길상 없는 궤도',                      year:2024, size:'60×45.5cm',  info:'장지에 수간분채, 수간석채' },
+  { file:'pajyeong.jpg',       title:'파경 破鏡',                           year:2024, size:'30×30cm',    info:'장지에 수간분채, 수간석채' },
+  { file:'naui-yeondaegi.jpg', title:'나의 연대기',                         year:2024, size:'67×100cm',   info:'장지에 수간분채 및 혼합 미디어' },
+  { file:'ujoo.jpg',           title:'우주 앞에서, 겸손',                   year:2024, size:'53×40cm',    info:'장지에 수간분채, 수간석채' },
+  { file:'yeoniip.jpg',        title:'연잎에 올랑',                         year:2024, size:'40×40cm',    info:'장지에 수간분채, 수간석채' },
+  { file:'gyeomson.jpg',       title:'겸손 謙遜',                           year:2024, size:'50×40cm',    info:'장지에 수간분채 및 혼합' },
+  { file:'olang-yakgwa.jpg',   title:'올랑도, 우리에게 너희를 지키는 건 약과야', year:2022, size:'48×48cm', info:'장지에 수간분채, 수간석채' },
+];
+
+document.getElementById('worksGrid').innerHTML = works.map((w,i) =>
+  `<div class="wcard-empty">
+    <p class="we-num">${String(i+1).padStart(2,'0')}</p>
+    <p class="we-t">${w.title}</p>
+    <p class="we-s">${w.year} · ${w.size}</p>
+    <p class="we-s" style="opacity:.6">${w.info}</p>
+  </div>`
+).join('');
+
+/* ── NAV 스크롤 ── */
 window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', scrollY > 60);
+  document.getElementById('nav').classList.toggle('sc', scrollY > 60);
 }, { passive: true });
 
-new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
-  { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
-).observe.bind(
-  new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
-    { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
-  )
-);
-// Scroll reveal
-const rvObs = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+/* ── 스크롤 리빌 ── */
+const obs = new IntersectionObserver(
+  es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
   { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
 );
-document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-// Marquee
-const terms = ['올랑이','파경 破鏡','나의 연대기','부활 復活','길상','민화기반 동시대회화','수간분채','수간석채','Park Kiryang','박기량'];
-const t = document.getElementById('mqTrack');
-t.innerHTML = [...terms,...terms].map(s => `<span class="mq-item">${s}</span>`).join('');
+/* ── 마퀴 ── */
+const terms = ['올랑이','파경 破鏡','나의 연대기','부활 復活','민화기반 동시대회화','수간분채','수간석채','Park Kiryang','박기량','마주보는 소리'];
+const t = document.getElementById('mqT');
+t.innerHTML = [...terms,...terms].map(s => `<span class="mq-i">${s}</span>`).join('');
 
-document.getElementById('copyright').textContent =
-  `© ${new Date().getFullYear()} 박기량 Park Kiryang`;
+document.getElementById('cr').textContent = `© ${new Date().getFullYear()} 박기량 Park Kiryang. All rights reserved.`;
 
-renderWorks('all');
+renderEx('all');
 </script>
 </body>
 </html>

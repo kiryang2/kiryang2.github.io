@@ -517,7 +517,7 @@
       GitHub에 images/ 폴더 만들고 파일 올린 뒤
       아래 src 경로를 ./images/hero.jpg 로 변경하면 됩니다.
     -->
-    <img src="./images/hero.jpg" alt="박기량 대표 작품"
+    <img src="./hero.jpg" alt="박기량 대표 작품"
       onerror="this.parentElement.style.background='#3A2E28';this.style.display='none'">
   </div>
   <div class="scroll-h">
@@ -760,7 +760,7 @@ const works = _D.works.length ? _D.works : [
 
 document.getElementById('worksGrid').innerHTML = works.map(w =>
   `<div class="wcard">
-    <div class="wcard-img" style="background-image:url('./이미지/${w.file}')"></div>
+    <div class="wcard-img" style="background-image:url('./${w.file}')"></div>
     <div class="wcard-overlay">
       <p class="wc-t">${w.title}</p>
       <p class="wc-m">${w.year} · ${w.size}</p>

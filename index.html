@@ -561,11 +561,6 @@
       <h2 class="heading">작품</h2>
     </div>
   </div>
-  <p class="works-note rv">
-    <strong>※ 이미지 추가 방법</strong> — GitHub 저장소에 <strong>images/</strong> 폴더를 만들고
-    작품 이미지를 올린 뒤, 아래 각 카드의 <strong>background-image</strong> 경로를 수정하세요.<br>
-    예: <code>background-image: url('./images/olang-01.jpg')</code>
-  </p>
   <div class="works-grid rv rv-d1" id="worksGrid"></div>
 </section>
 
@@ -763,12 +758,13 @@ const works = _D.works.length ? _D.works : [
   { file:'olang-yakgwa.jpg',   title:'올랑도, 우리에게 너희를 지키는 건 약과야', year:2022, size:'48×48cm', info:'장지에 수간분채, 수간석채' },
 ];
 
-document.getElementById('worksGrid').innerHTML = works.map((w,i) =>
-  `<div class="wcard-empty">
-    <p class="we-num">${String(i+1).padStart(2,'0')}</p>
-    <p class="we-t">${w.title}</p>
-    <p class="we-s">${w.year} · ${w.size}</p>
-    <p class="we-s" style="opacity:.6">${w.info}</p>
+document.getElementById('worksGrid').innerHTML = works.map(w =>
+  `<div class="wcard">
+    <div class="wcard-img" style="background-image:url('./images/${w.file}')"></div>
+    <div class="wcard-overlay">
+      <p class="wc-t">${w.title}</p>
+      <p class="wc-m">${w.year} · ${w.size}</p>
+    </div>
   </div>`
 ).join('');
 

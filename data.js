@@ -23,6 +23,8 @@ window.KIKI_DATA = {
     { file:'yeoniip.jpg',         title:'연잎에 올랑',                              year:2024, size:'40×40cm',     medium:'장지에 수간분채, 수간석채' },
     { file:'gyeomson.jpg',        title:'겸손 謙遜',                                year:2024, size:'50×40cm',     medium:'장지에 수간분채 및 혼합' },
     { file:'olang-yakgwa.jpg',    title:'올랑도, 우리에게 너희를 지키는 건 약과야', year:2022, size:'48×48cm',     medium:'장지에 수간분채, 수간석채' },
+    { file:'gilsangburn.jpg',    title:'길상이 타는 동안',                              year:2024, size:'60×60cm',     medium:'장지에 수간분채, 수간석채' },
+    { file:'bugui.jpg',          title:'부귀화조도 富貴花鳥圖',                          year:2022, size:'175×54cm',    medium:'장지에 수간분채, 수간석채' },
   ],
 
   exhibitions: [

@@ -51,7 +51,7 @@
   }
   .label::before{
     content:'';display:block;
-    width:18px;height:1.5px;background:var(--rust);flex-shrink:0;
+    width:18px;height:1.5px;background:var(--green);flex-shrink:0;
   }
   .heading{
     font-size:clamp(1.9rem,3.2vw,3rem);
@@ -89,7 +89,7 @@
   #hero{
     min-height:100vh;
     display:grid;grid-template-columns:1fr 1fr;
-    background:var(--ink);overflow:hidden;position:relative;
+    background:var(--paper);overflow:hidden;position:relative;
   }
   .hero-l{
     display:flex;flex-direction:column;justify-content:flex-end;
@@ -105,22 +105,22 @@
   .h-kr{
     font-size:clamp(3.8rem,7vw,6.5rem);
     font-weight:600;line-height:1;letter-spacing:-0.03em;
-    color:#fff;margin-bottom:.5rem;
+    color:var(--ink);margin-bottom:.5rem;
     opacity:0;animation:up 1s .5s var(--ease) forwards;
   }
   .h-en{
     font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:400;
     letter-spacing:0.22em;text-transform:uppercase;
-    color:rgba(255,255,255,.22);margin-bottom:2.8rem;
+    color:var(--dust);margin-bottom:2.8rem;
     opacity:0;animation:up .9s .65s var(--ease) forwards;
   }
   .h-bar{
-    width:36px;height:1.5px;background:var(--rust);margin-bottom:2rem;
+    width:36px;height:1.5px;background:var(--green);margin-bottom:2rem;
     opacity:0;animation:bar .7s .85s var(--ease) forwards;
   }
   .h-sub{
     font-size:.9rem;font-weight:400;line-height:1.9;
-    color:rgba(255,255,255,.42);max-width:260px;margin-bottom:3rem;
+    color:rgba(42,31,24,.55);max-width:260px;margin-bottom:3rem;
     word-break:keep-all;
     opacity:0;animation:up .9s 1s var(--ease) forwards;
   }
@@ -135,22 +135,22 @@
     letter-spacing:.16em;text-decoration:none;text-transform:uppercase;
     transition:all .3s var(--ease);border:none;cursor:pointer;
   }
-  .btn-r{background:var(--rust);color:#fff;}
-  .btn-r:hover{background:var(--rust-l);transform:translateY(-2px);}
+  .btn-r{background:var(--green);color:#fff;}
+  .btn-r:hover{background:var(--green-l);transform:translateY(-2px);}
   .btn-g{
-    border:1px solid rgba(255,255,255,.2);
-    color:rgba(255,255,255,.6);background:transparent;
+    border:1px solid rgba(42,31,24,.25);
+    color:rgba(42,31,24,.7);background:transparent;
   }
-  .btn-g:hover{border-color:rgba(255,255,255,.6);color:#fff;transform:translateY(-2px);}
+  .btn-g:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-2px);}
 
   .hero-r{position:relative;overflow:hidden;}
   .hero-r::before{
     content:'';position:absolute;inset:0;z-index:1;
-    background:linear-gradient(to right,var(--ink) 0%,rgba(40,33,28,.45) 35%,transparent 65%);
+    background:linear-gradient(to right,var(--paper) 0%,rgba(247,240,228,.5) 25%,transparent 55%);
   }
   .hero-r img{
     width:100%;height:100%;object-fit:cover;object-position:center top;
-    filter:brightness(.7) saturate(.9);
+    filter:brightness(1.02) saturate(1.05);
     opacity:0;transform:scale(1.06);
     animation:imgIn 1.4s .2s var(--ease) forwards;
   }
@@ -161,15 +161,15 @@
   }
   .scroll-h span{
     font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
-    color:rgba(255,255,255,.3);writing-mode:vertical-rl;
+    color:rgba(42,31,24,.35);writing-mode:vertical-rl;
   }
   .s-line{
-    width:1px;height:44px;background:rgba(255,255,255,.12);
+    width:1px;height:44px;background:rgba(42,31,24,.15);
     position:relative;overflow:hidden;
   }
   .s-line::after{
     content:'';position:absolute;top:-100%;width:100%;height:100%;
-    background:var(--rust);animation:drop 1.6s 2.2s infinite;
+    background:var(--green);animation:drop 1.6s 2.2s infinite;
   }
 
   @keyframes up  {from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -179,7 +179,7 @@
   @keyframes drop{to{top:200%}}
 
   /* ── MARQUEE ── */
-  .mq{background:var(--rust);padding:.85rem 0;overflow:hidden;}
+  .mq{background:var(--green);padding:.85rem 0;overflow:hidden;}
   .mq-t{display:flex;width:max-content;animation:mq 30s linear infinite;}
   .mq-i{
     font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
@@ -208,7 +208,7 @@
     font-size:clamp(1.2rem,2.2vw,1.8rem);font-weight:500;
     line-height:1.85;color:var(--ink);
     margin:2rem 0 3rem;padding-left:2rem;
-    border-left:2.5px solid var(--rust);word-break:keep-all;
+    border-left:2.5px solid var(--yellow);word-break:keep-all;
   }
   .stmt-b{
     font-size:.95rem;font-weight:400;line-height:2.3;
@@ -229,7 +229,7 @@
     background:rgba(40,33,28,.02);
     word-break:keep-all;line-height:1.7;
   }
-  .works-note strong{color:var(--rust);font-weight:500;}
+  .works-note strong{color:var(--green);font-weight:500;}
   .works-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -293,7 +293,7 @@
     font-family:'Pretendard',sans-serif;
   }
   .ex-tab.on,.ex-tab:hover{
-    background:var(--rust);color:#fff;border-color:var(--rust);
+    background:var(--green);color:#fff;border-color:var(--green);
   }
   .ex-list{display:none;}
   .ex-list.on{display:block;}
@@ -332,7 +332,7 @@
   .ap-row:first-of-type{border-top:1px solid var(--border);}
   .ap-year{
     font-size:.65rem;font-weight:600;letter-spacing:.12em;
-    color:var(--rust);min-width:40px;padding-top:.1rem;
+    color:var(--yellow);min-width:40px;padding-top:.1rem;
   }
   .ap-text{
     font-size:.85rem;font-weight:400;line-height:1.7;
@@ -356,7 +356,7 @@
     font-size:.8rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
     color:var(--dust);margin-bottom:2.5rem;
   }
-  .ab-bar{width:36px;height:2px;background:var(--rust);margin-bottom:2.5rem;}
+  .ab-bar{width:36px;height:2px;background:var(--yellow);margin-bottom:2.5rem;}
   .ab-bio{
     font-size:.9rem;font-weight:400;line-height:2.2;
     color:rgba(40,33,28,.65);word-break:keep-all;position:relative;z-index:1;
@@ -388,7 +388,7 @@
   .act-row:first-of-type{border-top:1px solid rgba(255,255,255,.1);}
   .act-tag{
     font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
-    color:rgba(255,255,255,.45);min-width:44px;padding-top:.12rem;
+    color:var(--yellow-l);min-width:44px;padding-top:.12rem;
   }
   .act-text{
     font-size:.83rem;font-weight:400;line-height:1.75;
@@ -483,9 +483,6 @@
 </head>
 <body>
 
-<!-- data.js 로드 -->
-<script src="./data.js"></script>
-
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">Park Kiryang</a>
@@ -547,7 +544,7 @@
       나는 그 상징을 그대로 가져오되, 권위적이고 위압적인 호랑이의 모습 대신
       나에게 위안을 주는 존재인 아이들의 모습을 투영하여
       감정을 이해하고 마음을 지켜주는 아기호랑이를 그렸습니다.<br><br>
-      <em style="font-style:normal;color:var(--rust);font-weight:500;">Keywords</em>&nbsp;&nbsp;
+      <em style="font-style:normal;color:var(--green);font-weight:500;">Keywords</em>&nbsp;&nbsp;
       감정 / 시점 / 반복 / 밀도 / 올랑이
     </p>
   </div>
@@ -677,7 +674,8 @@
 
 <script>
 /* ── 데이터 로드 (data.js 우선, 없으면 내장 데이터) ── */
-const _D = window.KIKI_DATA || { works: [], exhibitions: [] };
+// data.js가 먼저 로드된 경우 사용, 아니면 내장 데이터 사용
+const _D = (typeof window.KIKI_DATA !== 'undefined') ? window.KIKI_DATA : { works: [], exhibitions: [] };
 
 /* ── 전시 데이터 ── */
 const exhibitions = _D.exhibitions.length ? _D.exhibitions : [
@@ -737,25 +735,27 @@ document.querySelectorAll('.ex-tab').forEach(btn => {
 });
 
 /* ── 작품 데이터 ── */
-const works = _D.works.length ? _D.works : [
-  { file:'hae-hangari.jpg',    title:'해害 항아리',                         year:2026, size:'P12',        info:'장지에 수간분채 및 과슈' },
-  { file:'hae-hangari-ihu.jpg',title:'해害 항아리 이후',                    year:2026, size:'53×41cm',    info:'장지에 수간분채, 석채 및 혼합' },
-  { file:'dasi-saengil2.jpg',  title:'다시, 생일2',                         year:2025, size:'29.7×84.1cm',info:'장지에 수간분채, 석채, 과슈 및 혼합' },
-  { file:'haebang.jpg',        title:'해방의 날',                           year:2025, size:'50×40cm',    info:'장지에 수간분채, 수간석채' },
-  { file:'jungseo.jpg',        title:'정서의 해상도',                       year:2025, size:'91×50cm',    info:'장지에 수간분채 및 혼합' },
-  { file:'sayoo.jpg',          title:'사유 思流',                           year:2025, size:'50×40cm',    info:'장지에 수간분채 및 혼합' },
-  { file:'jikyeo-olang.jpg',   title:'지켜주는 민화: 길 위에 올랑',        year:2025, size:'50×40cm',    info:'장지에 수간분채 및 혼합' },
-  { file:'hoebogui-sup.jpg',   title:'회복의 숲',                           year:2024, size:'50×70cm',    info:'장지에 수간분채 및 혼합' },
-  { file:'sumul-got.jpg',      title:'숨을 곳 (미성숙에 대한 용사)',        year:2024, size:'74×27cm',    info:'장지에 수간분채 및 과슈' },
-  { file:'dasi-saengil.jpg',   title:'다시, 생일',                          year:2024, size:'53×46cm',    info:'장지에 수간분채, 석채 및 혼합' },
-  { file:'gyeonggye.jpg',      title:'경계의 정원',                         year:2024, size:'40×40cm',    info:'장지에 수간분채 및 과슈' },
-  { file:'gilsang-gido.jpg',   title:'길상 없는 궤도',                      year:2024, size:'60×45.5cm',  info:'장지에 수간분채, 수간석채' },
-  { file:'pajyeong.jpg',       title:'파경 破鏡',                           year:2024, size:'30×30cm',    info:'장지에 수간분채, 수간석채' },
-  { file:'naui-yeondaegi.jpg', title:'나의 연대기',                         year:2024, size:'67×100cm',   info:'장지에 수간분채 및 혼합 미디어' },
-  { file:'ujoo.jpg',           title:'우주 앞에서, 겸손',                   year:2024, size:'53×40cm',    info:'장지에 수간분채, 수간석채' },
-  { file:'yeoniip.jpg',        title:'연잎에 올랑',                         year:2024, size:'40×40cm',    info:'장지에 수간분채, 수간석채' },
-  { file:'gyeomson.jpg',       title:'겸손 謙遜',                           year:2024, size:'50×40cm',    info:'장지에 수간분채 및 혼합' },
-  { file:'olang-yakgwa.jpg',   title:'올랑도, 우리에게 너희를 지키는 건 약과야', year:2022, size:'48×48cm', info:'장지에 수간분채, 수간석채' },
+const works = [
+  { file:'hae-hangari.jpg',      title:'해害 항아리',                              year:2026, size:'P12' },
+  { file:'hae-hangari-ihu.jpg',  title:'해害 항아리 이후',                         year:2026, size:'53×41cm' },
+  { file:'dasi-saengil2.jpg',    title:'다시, 생일2',                              year:2025, size:'29.7×84.1cm' },
+  { file:'haebang.jpg',          title:'해방의 날',                                year:2025, size:'50×40cm' },
+  { file:'jungseo.jpg',          title:'정서의 해상도',                            year:2025, size:'91×50cm' },
+  { file:'sayoo.jpg',            title:'사유 思流',                                year:2025, size:'50×40cm' },
+  { file:'jikyeo-olang.jpg',     title:'지켜주는 민화: 길 위에 올랑',              year:2025, size:'50×40cm' },
+  { file:'hoebogui-sup .jpg',    title:'회복의 숲',                                year:2024, size:'50×70cm' },
+  /* 위 파일명에 공백이 있음 — GitHub에서 hoebogui-sup.jpg로 재업로드 후 공백 제거 권장 */
+  { file:'sumul-got.jpg',        title:'숨을 곳 (미성숙에 대한 용사)',              year:2024, size:'74×27cm' },
+  { file:'dasi-saengil.jpg',     title:'다시, 생일',                               year:2024, size:'53×46cm' },
+  { file:'gyeonggye.jpg',        title:'경계의 정원',                              year:2024, size:'40×40cm' },
+  { file:'gilsang-gido.jpg',     title:'길상 없는 궤도',                           year:2024, size:'60×45.5cm' },
+  { file:'gilsangburn.jpg',      title:'길상이 타는 동안',                         year:2024, size:'60×60cm' },
+  { file:'pajyeong.jpg',         title:'파경 破鏡',                                year:2024, size:'30×30cm' },
+  { file:'ujoo.jpg',             title:'우주 앞에서, 겸손',                         year:2024, size:'53×40cm' },
+  { file:'yeoniip.jpg',          title:'연잎에 올랑',                              year:2024, size:'40×40cm' },
+  { file:'gyeomson.jpg',         title:'겸손 謙遜',                                year:2024, size:'50×40cm' },
+  { file:'olang-yakgwa.jpg',     title:'올랑도, 우리에게 너희를 지키는 건 약과야', year:2022, size:'48×48cm' },
+  { file:'bugui.jpg',            title:'부귀화조도 富貴花鳥圖',                    year:2022, size:'175×54cm' },
 ];
 
 document.getElementById('worksGrid').innerHTML = works.map(w =>

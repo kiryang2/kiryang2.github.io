@@ -11,6 +11,7 @@ window.KIKI_DATA = {
     { file:'haebang.jpg',         title:'해방의 날',                                year:2025, size:'50×40cm',     medium:'장지에 수간분채, 수간석채' },
     { file:'haebang2.jpg',        title:'해방의 날2',                               year:2026, size:'25×25cm',     medium:'Gouache on Jang-Ji' },
     { file:'haebang3.jpg',        title:'해방의 날3',                               year:2026, size:'24×24cm',     medium:'Gouache on Jang-Ji' },
+    { file:'wegov.jpg',           title:'We go V(위고비)',                          year:2026, size:'25×25cm',     medium:'Gouache on Jang-Ji' },
     { file:'jungseo.jpg',         title:'정서의 해상도',                            year:2025, size:'91×50cm',     medium:'장지에 수간분채 및 혼합' },
     { file:'sayoo.jpg',           title:'사유 思流',                                year:2025, size:'50×40cm',     medium:'장지에 수간분채 및 혼합' },
     { file:'jikyeo-olang.jpg',    title:'지켜주는 민화: 길 위에 올랑',              year:2025, size:'50×40cm',     medium:'장지에 수간분채 및 혼합' },

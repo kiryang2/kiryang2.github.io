@@ -31,7 +31,8 @@ window.KIKI_DATA = {
   ],
 
   exhibitions: [
-    { year:2026, type:'solo',    title:'제 4회 개인전 〈올랑이의 세계 : 사유의 형식들〉', venue:'순천문화예술회관, 2026.08' },
+    { year:2026, type:'invited', title:'2026 언노운바이브 아트페어 인스퍼레이션 ', venue:'갤러리Mik, 2026.08' },
+    { year:2026, type:'solo',    title:'제 4회 개인전 〈올랑이의 세계 : 사유의 형식들〉', venue:'갤러리142, 2026.08' },
     { year:2026, type:'group',   title:'갤러리비브 여름특별전 〈Wave〉',                        venue:'갤러리비브, 2026.07' },
     { year:2026, type:'group',   title:'전남문화재단 남도예술은행 in 렌트 선정작가전',           venue:'전라남도청, 2026.05' },
     { year:2026, type:'invited', title:'〈겹과 결〉 광양미술협회 집행이사진 기획초대전', venue:'인서리01 반창고갤러리' },

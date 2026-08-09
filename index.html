@@ -106,29 +106,31 @@
     display:grid;grid-template-columns:1fr 1fr;
     background:var(--ink);overflow:hidden;position:relative;
   }
-  /* 배경 작품 모자이크 */
-  .hero-bg{
+  /* 전체 배경 — 작품 텍스처 레이어 */
+  .hero-texture{
     position:absolute;inset:0;z-index:0;
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    grid-template-rows:repeat(3,1fr);
-    opacity:0;
-    animation:fi 1.2s 0.5s forwards;
+    display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr);
   }
-  .hero-bg-item{
+  .hero-texture-item{
     background-size:cover;background-position:center;
-    filter:brightness(.35) saturate(.6);
-    transition:filter .4s;
+    opacity:.09;
+    filter:saturate(.5) brightness(.8);
   }
-  #hero::after{
-    content:'';position:absolute;inset:0;z-index:1;
-    background:
-      linear-gradient(to right, var(--ink) 0%, rgba(20,27,60,.82) 45%, rgba(20,27,60,.65) 75%, rgba(20,27,60,.75) 100%),
-      linear-gradient(to bottom, rgba(20,27,60,.4) 0%, transparent 30%, transparent 70%, rgba(20,27,60,.6) 100%);
+  /* 전체 오버레이 */
+  .hero-overlay{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(
+      110deg,
+      rgba(20,27,60,.95) 0%,
+      rgba(20,27,60,.88) 40%,
+      rgba(20,27,60,.75) 65%,
+      rgba(20,27,60,.82) 100%
+    );
   }
+
   .hero-l{
-    display:flex;flex-direction:column;justify-content:flex-end;
-    padding:5rem 4.5rem 5.5rem;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:5rem 4.5rem 5rem;
     position:relative;z-index:2;
   }
   .h-label{
@@ -179,34 +181,44 @@
   .btn-g:hover{border-color:#fff;color:#fff;transform:translateY(-2px);}
 
   .hero-r{
-    position:relative;
+    position:relative;z-index:2;
     display:flex;align-items:flex-end;justify-content:center;
-    padding-bottom:4rem;
-    z-index:2;
+    padding:0 3rem 4rem;
   }
   .hero-r::before{display:none;}
+  .hero-r::after{display:none;}
   .hero-profile-wrap{
     position:relative;
-    width:min(380px,80%);
+    width:min(360px,78%);
+  }
+  /* 프로필 뒤 장식 사각형 */
+  .hero-profile-deco{
+    position:absolute;
+    top:-16px;right:-16px;
+    width:65%;height:55%;
+    border:1.5px solid rgba(58,188,170,.25);
+    z-index:0;
+    opacity:0;
+    animation:fi 1s 1.3s forwards;
+  }
+  .hero-profile-deco2{
+    position:absolute;
+    bottom:-12px;left:-12px;
+    width:40%;height:35%;
+    border:1px solid rgba(255,255,255,.1);
+    z-index:0;
+    opacity:0;
+    animation:fi 1s 1.5s forwards;
   }
   .hero-profile-img{
     width:100%;
-    aspect-ratio:.85;
+    aspect-ratio:.82;
     object-fit:cover;
     object-position:center top;
     display:block;
-    clip-path:polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
+    position:relative;z-index:1;
     opacity:0;
-    animation:profileIn 1.2s .8s var(--ease) forwards;
-  }
-  .hero-profile-deco{
-    position:absolute;
-    bottom:-1rem;right:-1rem;
-    width:60%;aspect-ratio:1;
-    border:1.5px solid rgba(58,188,170,.3);
-    z-index:-1;
-    opacity:0;
-    animation:fi 1s 1.2s forwards;
+    animation:profileIn 1.1s .7s var(--ease) forwards;
   }
   @keyframes profileIn{
     from{opacity:0;transform:translateY(20px);}
@@ -622,9 +634,6 @@
 
 <!-- HERO -->
 <section id="hero">
-  <!-- 배경 작품 모자이크 -->
-  <div class="hero-bg" id="heroBg"></div>
-
   <div class="hero-l">
     <p class="h-label">Contemporary Painting Rooted in Minhwa</p>
     <h1 class="h-kr">박기량</h1>
@@ -642,6 +651,7 @@
       <img class="hero-profile-img" src="./profile.jpg" alt="박기량 Park Kiryang"
         onerror="this.style.display='none'">
       <div class="hero-profile-deco"></div>
+      <div class="hero-profile-deco2"></div>
     </div>
   </div>
 
@@ -1185,20 +1195,19 @@ document.getElementById('cr').textContent = `© ${new Date().getFullYear()} 박�
 
 renderEx('all');
 
-/* ── 히어로 배경 모자이크 ── */
+/* ── 히어로 텍스처 배경 ── */
 (function(){
-  const bg = document.getElementById('heroBg');
+  const bg = document.getElementById('heroTexture');
   if(!bg) return;
   const imgs = [
     'gyeonggye.jpg','hae-hangari.jpg','dasi-saengil2.jpg','gilsangburn.jpg',
     'yeoniip.jpg','haebang.jpg','pajyeong.jpg','jungseo.jpg','bugui.jpg',
     'olang-yakgwa.jpg','sumul-got.jpg','gyeomson.jpg','dasi-saengil.jpg',
-    'gilsang-gido.jpg','haebang2.jpg'
+    'gilsang-gido.jpg','haebang2.jpg','haebang3.jpg','wegov.jpg','hae-hangari-ihu.jpg'
   ];
-  // 15칸 채우기
-  for(let i=0;i<15;i++){
+  for(let i=0;i<18;i++){
     const d = document.createElement('div');
-    d.className = 'hero-bg-item';
+    d.className = 'hero-texture-item';
     d.style.backgroundImage = "url('./"+imgs[i%imgs.length]+"')";
     bg.appendChild(d);
   }

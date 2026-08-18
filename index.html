@@ -28,6 +28,10 @@
     --blue:   #3A6FC8;
     --green:  #2ABCAA;
     --green-l:#4FD4C4;
+    --sage:   #EEF4F1;
+    --ochre:  #E5B84B;
+    --rust:   #C65A3A;
+    --rust-l: #F3A27F;
     --dust:   #8890B0;
     --light:  #F4F5FA;
     --border: rgba(20,27,60,.1);
@@ -92,16 +96,26 @@
   .nav-logo{
     font-size:0.82rem;font-weight:600;
     letter-spacing:0.14em;text-decoration:none;
-    color:var(--ink);text-transform:uppercase;
+    color:#fff;text-transform:uppercase;
+    transition:color .25s;
   }
+  nav.sc .nav-logo{color:var(--ink);}
   .nav-links{display:flex;gap:2.4rem;list-style:none;}
   .nav-links a{
     font-size:0.7rem;font-weight:500;
     letter-spacing:0.12em;text-decoration:none;
-    color:var(--ink);opacity:0.45;
+    color:#fff;opacity:0.68;
     transition:opacity 0.25s;text-transform:uppercase;
   }
   .nav-links a:hover{opacity:1;color:var(--teal);}
+  nav.sc .nav-links a{color:var(--ink);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  .menu-toggle{
+    display:none;background:none;border:0;color:#fff;cursor:pointer;
+    font-family:'Pretendard',sans-serif;font-size:.7rem;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;padding:.4rem 0;
+  }
+  nav.sc .menu-toggle{color:var(--ink);}
 
   /* ── HERO ── */
   #hero{
@@ -137,7 +151,7 @@
   .h-label{
     font-size:0.68rem;font-weight:500;
     letter-spacing:0.24em;text-transform:uppercase;
-    color:var(--rust-l);margin-bottom:2rem;
+    color:var(--teal-l);margin-bottom:2rem;
     opacity:0;animation:up .9s .35s var(--ease) forwards;
   }
   .h-kr{
@@ -323,12 +337,21 @@
     position:relative;overflow:hidden;cursor:pointer;
     display:flex;flex-direction:column;
     justify-content:flex-end;
+    border:0;width:100%;padding:0;text-align:left;
+    font-family:inherit;color:inherit;
   }
   .wcard-img{
     position:absolute;inset:0;
-    background-size:cover;background-position:center;
+    width:100%;height:100%;object-fit:cover;object-position:center;
     transition:transform .6s var(--ease);
   }
+  .wcard-fallback{
+    position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+    padding:1.5rem;text-align:center;background:linear-gradient(145deg,#F2F4F7,#E7EBF1);
+    color:var(--ink);font-size:.82rem;font-weight:500;line-height:1.6;
+  }
+  .wcard.image-missing .wcard-fallback{display:flex;}
+  .wcard.image-missing .wcard-overlay{opacity:1;background:linear-gradient(160deg,transparent 25%,rgba(20,27,60,.82) 100%);}
   .wcard:hover .wcard-img{transform:scale(1.05);}
   .wcard-overlay{
     position:absolute;inset:0;
@@ -580,8 +603,9 @@
   }
 
   /* ── SCROLL REVEAL ── */
-  .rv{opacity:0;transform:translateY(32px);transition:opacity .85s var(--ease),transform .85s var(--ease);}
-  .rv.on{opacity:1;transform:none;}
+  .rv{opacity:1;transform:none;}
+  .reveal-ready .rv{opacity:0;transform:translateY(32px);transition:opacity .85s var(--ease),transform .85s var(--ease);}
+  .reveal-ready .rv.on{opacity:1;transform:none;}
   .rv-d1{transition-delay:.1s;}.rv-d2{transition-delay:.2s;}
 
   /* ── RESPONSIVE ── */
@@ -610,11 +634,25 @@
   }
   @media(max-width:640px){
     nav{padding:1.2rem 1.5rem;}nav.sc{padding:.8rem 1.5rem;}
+    .lang-toggle{margin-left:auto;margin-right:1rem;}
+    .menu-toggle{display:block;}
     .nav-links{display:none;}
+    nav.menu-open{
+      background:rgba(255,255,255,.98);box-shadow:0 1px 0 var(--border);
+    }
+    nav.menu-open .nav-logo,nav.menu-open .menu-toggle,nav.menu-open .lang-btn,nav.menu-open .lang-sep{color:var(--ink);}
+    nav.menu-open .lang-btn.active{color:var(--teal);}
+    nav.menu-open .nav-links{
+      display:flex;position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;gap:0;background:rgba(255,255,255,.98);
+      padding:.5rem 1.5rem 1.2rem;border-bottom:1px solid var(--border);
+    }
+    nav.menu-open .nav-links a{display:block;color:var(--ink);padding:.8rem 0;opacity:.72;}
     .hero-l{padding:7rem 1.5rem 2rem;}
     #statement{padding:5rem 1.5rem;}
     #works{padding:4rem 1.5rem;}
     .works-grid{grid-template-columns:repeat(2,1fr);gap:.3rem;}
+    .wcard-overlay{opacity:1;background:linear-gradient(160deg,transparent 45%,rgba(20,27,60,.78) 100%);padding:1rem;}
     #exhibitions{padding:4rem 1.5rem;}
     .aw-l,.aw-r{padding:4rem 1.5rem;}
     .ab-l,.ab-r{padding:4rem 1.5rem;}
@@ -632,11 +670,12 @@
 <nav id="nav">
   <a href="#" class="nav-logo">Park Kiryang</a>
   <div class="lang-toggle">
-    <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+    <button type="button" class="lang-btn active" id="btnEN" aria-pressed="true">EN</button>
     <span class="lang-sep">·</span>
-    <button class="lang-btn" id="btnKO" onclick="setLang('ko')">KO</button>
+    <button type="button" class="lang-btn" id="btnKO" aria-pressed="false">KO</button>
   </div>
-  <ul class="nav-links">
+  <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#statement">Statement</a></li>
     <li><a href="#works">Works</a></li>
     <li><a href="#exhibitions">CV</a></li>
@@ -647,6 +686,9 @@
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-studio-bg"></div>
+  <div class="hero-overlay"></div>
+
   <div class="hero-l">
     <p class="h-label">Contemporary Painting Rooted in Minhwa</p>
     <h1 class="h-kr">박기량</h1>
@@ -767,7 +809,7 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about" style="display:grid;grid-template-columns:1fr 1fr;">
+<section id="about">
   <div class="ab-l rv">
     <div class="ab-deco">作</div>
     <div class="label">About</div>
@@ -806,8 +848,8 @@
     <div class="act-row"><span class="act-tag">기획</span><span class="act-text">'민화의 정원' 전시 기획 및 마케팅 다수</span></div>
     <div class="act-row"><span class="act-tag">목표</span><span class="act-text">'올랑이를 그리는 페인터 박기량'으로 국내외 미술시장에서 입지 구축</span></div>
     <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);">
-      <p style="font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-l);margin-bottom:.5rem;">Practice</p>
-      <p style="font-size:.88rem;font-weight:400;color:rgba(255,255,255,.6);line-height:1.8;">Painting · Participatory Projects<br>Object &amp; Digital Experimentation</p>
+      <p class="practice-label" style="font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-l);margin-bottom:.5rem;">Practice</p>
+      <p class="practice-value" style="font-size:.88rem;font-weight:400;color:rgba(255,255,255,.6);line-height:1.8;">Painting · Participatory Projects<br>Object &amp; Digital Experimentation</p>
     </div>
   </div>
 </section>
@@ -838,9 +880,9 @@
 </section>
 
 <!-- LIGHTBOX -->
-<div class="lb" id="lb">
-  <button class="lb-close" id="lbClose">✕ Close</button>
-  <button class="lb-nav lb-prev" id="lbPrev">‹</button>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Artwork details">
+  <button type="button" class="lb-close" id="lbClose">✕ Close</button>
+  <button type="button" class="lb-nav lb-prev" id="lbPrev" aria-label="Previous artwork">‹</button>
   <div class="lb-inner">
     <img class="lb-img" id="lbImg" src="" alt="">
     <div class="lb-text">
@@ -849,21 +891,29 @@
       <div class="lb-detail" id="lbDetail"></div>
     </div>
   </div>
-  <button class="lb-nav lb-next" id="lbNext">›</button>
+  <button type="button" class="lb-nav lb-next" id="lbNext" aria-label="Next artwork">›</button>
 </div>
 
 <footer>
   <span id="cr"></span>
-  <span>Minhwa-based Contemporary Painting</span>
+  <span id="footerTagline">Minhwa-based Contemporary Painting</span>
 </footer>
 
+<script src="./data.js"></script>
 <script>
+(() => {
+'use strict';
+
+document.documentElement.classList.add('reveal-ready');
+
 /* ── 데이터 로드 (data.js 우선, 없으면 내장 데이터) ── */
 // data.js가 먼저 로드된 경우 사용, 아니면 내장 데이터 사용
-const _D = (typeof window.KIKI_DATA !== 'undefined') ? window.KIKI_DATA : { works: [], exhibitions: [] };
+const externalData = typeof KIKI_DATA !== 'undefined' ? KIKI_DATA : window.KIKI_DATA;
+const _D = externalData && typeof externalData === 'object' ? externalData : { works: [], exhibitions: [] };
+let currentLang = 'en';
 
 /* ── 전시 데이터 ── */
-const exhibitions = _D.exhibitions.length ? _D.exhibitions : [
+const fallbackExhibitions = [
   { year:2026, type:'group',   title:'언노운바이브 아트페어 2026 인스퍼레이션',         venue:'갤러리Mik 초대, 2026.08' },
   { year:2026, type:'solo',    title:'제 4회 개인전 〈올랑이의 세계 : 사유의 형식들〉', venue:'갤러리142, 2026.08' },
   { year:2026, type:'invited', title:'갤러리비브 여름특별전 〈Wave〉',                        venue:'갤러리비브, 2026.07' },
@@ -890,6 +940,35 @@ const exhibitions = _D.exhibitions.length ? _D.exhibitions : [
   { year:2021, type:'solo',    title:'개인전 〈민화의 기량〉', venue:'순천 조강훈아트스튜디오' },
   { year:2019, type:'group',   title:'민화의정원展', venue:'외 단체전 3회 이상' },
 ];
+const exhibitions = Array.isArray(_D.exhibitions) && _D.exhibitions.length ? _D.exhibitions : fallbackExhibitions;
+
+const exhibitionsEN = {
+  '언노운바이브 아트페어 2026 인스퍼레이션': ['Unknown Vibe Art Fair 2026: Inspiration', 'Invited by Gallery MIK · Aug. 2026'],
+  '제 4회 개인전 〈올랑이의 세계 : 사유의 형식들〉': ["4th Solo Exhibition, Ollangi's World: Forms of Reflection", 'Gallery 142 · Aug. 2026'],
+  '갤러리비브 여름특별전 〈Wave〉': ['Gallery VIVE Summer Special Exhibition, Wave', 'Gallery VIVE · Jul. 2026'],
+  '전남문화재단 남도예술은행 in 렌트 선정작가전': ['Namdo Art Bank in-Rent: Selected Artists Exhibition', 'Jeollanam-do Provincial Government · May 2026'],
+  '〈겹과 결〉 광양미술협회 집행이사진 기획초대전': ['Layers and Textures: Curated Invitational Exhibition', 'Inseori 01 Bandage Gallery'],
+  '〈3℃〉 박기량 × 김설화(도예가) 듀오 초대전': ['3°C: Park Kiryang × Kim Seolhwa, Invitational Duo Exhibition', 'Inseori 01 Bandage Gallery'],
+  '광양시의회 초대 개인전 〈보이는 의견〉': ['Invitational Solo Exhibition, Visible Opinions', 'Gwangyang City Council'],
+  '〈민화연대기〉': ['A Chronicle of Minhwa', 'Jeollanam-do Eastern Government Office'],
+  '지역작가 협업초대전 〈시간이 머문 골목〉': ['Regional Artists Invitational Collaboration, An Alley Where Time Lingers', 'Okjugol Creative Studio, Jindo'],
+  '〈Hidden Catch: 꼭꼭 숨어라, 민화보일라〉': ['Hidden Catch: Minhwa in Sight', 'Inseori 01 Bandage Gallery'],
+  '광양 국제미디어아트 페스티벌 연계 그룹전 〈여그가 여유지〉': ['Gwangyang International Media Art Festival Group Exhibition, Here Is Ease', 'Gwangyang'],
+  '개인전 〈마주보는 소리〉': ['Solo Exhibition, Facing Sounds', 'Dada Gallery'],
+  '능가사 기획초대전 〈민화의정원展〉': ['Neunggasa Curated Invitational Exhibition, Garden of Minhwa', 'Neunggasa Temple, Goheung'],
+  '〈정원에 햇살이 비치면〉': ['When Sunlight Falls on the Garden', 'Gwangyang Public Library, Jeollanam-do Office of Education'],
+  '한국미술협회 제 25회 광양·포항 교류전': ['25th Gwangyang–Pohang Exchange Exhibition, Korean Fine Arts Association', 'Pohang'],
+  '제 7회 남해안남중권 문화예술제 교류전': ['7th South-Central Southern Coast Culture and Arts Festival Exchange Exhibition', 'Hadong'],
+  '제 3회 영호남상생협력 화합 대축전 〈청년작가ART展〉': ['3rd Yeongnam–Honam Coexistence Festival, Young Artists ART', 'Gwanghwamun Square, Seoul'],
+  '기획초대전 〈오색찬란전〉 〈쉬어가는자리〉 〈도심속작은갤러리〉': ['Curated Invitationals: Brilliant Colors; A Place to Rest; A Small Gallery in the City', 'Gwangyang Culture and Arts Center'],
+  '제 1회 한국민화교육협회 지도자 특별전': ['1st Korean Minhwa Education Association Instructors Special Exhibition', 'Lucysson Atelier, Jeju'],
+  '아트옥션 〈아트로 놀자!〉': ["Art Auction, Let's Play with Art!", 'Gwangyang Culture City Center'],
+  '〈민화의 정원, 수복〉': ['The Garden of Minhwa: Longevity and Blessings', 'Suncheon Bu-eupseong South Gate Square'],
+  '민화來용': ['Minhwa來yong: Minhwa Comes to You', 'Art Space Ieum, Gwangyang · two additional group exhibitions'],
+  '전남여성작가회 정기전 남도의 꽃과 정원': ['Jeonnam Women Artists Association Annual Exhibition, Flowers and Gardens of Namdo', 'Mokpo · five or more additional group exhibitions'],
+  '개인전 〈민화의 기량〉': ['Solo Exhibition, The Artistry of Minhwa', 'Jo Kang-hoon Art Studio, Suncheon'],
+  '민화의정원展': ['Garden of Minhwa', 'Three or more additional group exhibitions'],
+};
 
 window._typeLabel = null;
 const typeLabel = { solo:'개인전', group:'단체전', invited:'초대전' };
@@ -905,10 +984,14 @@ function renderEx(filter) {
         <p style="font-size:.72rem;font-weight:600;letter-spacing:.18em;color:var(--rust-l);margin-bottom:.8rem;text-transform:uppercase">${y}</p>`;
     } else html += '<div>';
     items.forEach(e => {
+      const translated = exhibitionsEN[e.titleKo || e.title] || [];
+      const title = currentLang === 'en' ? (e.titleEn || translated[0] || e.title) : (e.titleKo || e.title);
+      const venue = currentLang === 'en' ? (e.venueEn || translated[1] || e.venue) : (e.venueKo || e.venue);
+      const labels = window._typeLabel || typeLabel;
       html += `<div class="ex-item">
-        <span class="ex-type ${e.type}">${typeLabel[e.type]}</span>
-        <span class="ex-title">${e.title}</span>
-        <span class="ex-venue">${e.venue}</span>
+        <span class="ex-type ${e.type}">${labels[e.type] || e.type}</span>
+        <span class="ex-title">${escapeHTML(title)}</span>
+        <span class="ex-venue">${escapeHTML(venue)}</span>
       </div>`;
     });
     html += '</div>';
@@ -927,30 +1010,30 @@ document.querySelectorAll('.ex-tab').forEach(btn => {
 /* ── 작품 데이터 ── */
 // 작품 영문 제목
 const worksEN = {
-  'hae-hangari.jpg':     'Harmful Jar',
-  'hae-hangari-ihu.jpg': 'After the Harmful Jar',
-  'dasi-saengil2.jpg':   'Birthday, Again 2',
-  'haebang.jpg':         'Day of Liberation',
-  'haebang2.jpg':        'Day of Liberation 2',
-  'haebang3.jpg':        'Day of Liberation 3',
+  'hae-hangari.jpg':     'Jar of Harm',
+  'hae-hangari-ihu.jpg': 'After the Jar of Harm',
+  'dasi-saengil2.jpg':   'Birthday, Again II',
+  'haebang.jpg':         'The Day of Liberation',
+  'haebang2.jpg':        'The Day of Liberation II',
+  'haebang3.jpg':        'The Day of Liberation III',
   'wegov.jpg':           'We Go V',
-  'jungseo.jpg':         'Resolution of Emotion',
-  'sayoo.jpg':           'Flow of Thought',
+  'jungseo.jpg':         'Emotional Resolution',
+  'sayoo.jpg':           'Thoughtstream',
   'jikyeo-olang.jpg':    'Protective Minhwa: Ollangi on the Road',
-  'hoebogui-sup .jpg':   'Forest of Recovery',
+  'hoebogui-sup.jpg':    'Forest of Recovery',
   'sumul-got.jpg':       'A Place to Hide',
   'dasi-saengil.jpg':    'Birthday, Again',
-  'gyeonggye.jpg':       'Garden of Boundaries',
-  'gilsang-gido.jpg':    'Orbit Without Fortune',
-  'gilsangburn.jpg':     'While the Fortune Burns',
+  'gyeonggye.jpg':       'The Garden of Boundaries',
+  'gilsang-gido.jpg':    'An Orbit Without Auspice',
+  'gilsangburn.jpg':     'While Auspice Burns',
   'pajyeong.jpg':        'Broken Mirror',
-  'ujoo.jpg':            'Before the Universe, Humility',
-  'yeoniip.jpg':         'Ollangi on Lotus Leaf',
+  'ujoo.jpg':            'Humility Before the Universe',
+  'yeoniip.jpg':         'Ollangi on a Lotus Leaf',
   'gyeomson.jpg':        'Humility',
-  'olang-yakgwa.jpg':    "Ollangi, Protecting You Is Nothing",
-  'bugui.jpg':           'Painting of Wealth and Birds',
+  'olang-yakgwa.jpg':    'Ollangi: Protecting You Is a Piece of Cake',
+  'bugui.jpg':           'Flowers and Birds of Wealth and Honor',
 };
-const works = [
+const fallbackWorks = [
   { file:'hae-hangari.jpg',      title:'해害 항아리',                              year:2026, size:'P12' },
   { file:'hae-hangari-ihu.jpg',  title:'해害 항아리 이후',                         year:2026, size:'53×41cm' },
   { file:'dasi-saengil2.jpg',    title:'다시, 생일2',                              year:2025, size:'29.7×84.1cm' },
@@ -961,8 +1044,7 @@ const works = [
   { file:'jungseo.jpg',          title:'정서의 해상도',                            year:2025, size:'91×50cm' },
   { file:'sayoo.jpg',            title:'사유 思流',                                year:2025, size:'50×40cm' },
   { file:'jikyeo-olang.jpg',     title:'지켜주는 민화: 길 위에 올랑',              year:2025, size:'50×40cm' },
-  { file:'hoebogui-sup .jpg',    title:'회복의 숲',                                year:2024, size:'50×70cm' },
-  /* 위 파일명에 공백이 있음 — GitHub에서 hoebogui-sup.jpg로 재업로드 후 공백 제거 권장 */
+  { file:'hoebogui-sup.jpg',     fallbackFile:'hoebogui-sup .jpg', title:'회복의 숲', year:2024, size:'50×70cm' },
   { file:'sumul-got.jpg',        title:'숨을 곳 (미성숙에 대한 용사)',              year:2024, size:'74×27cm' },
   { file:'dasi-saengil.jpg',     title:'다시, 생일',                               year:2024, size:'53×46cm' },
   { file:'gyeonggye.jpg',        title:'경계의 정원',                              year:2024, size:'40×40cm' },
@@ -975,40 +1057,73 @@ const works = [
   { file:'olang-yakgwa.jpg',     title:'올랑도, 우리에게 너희를 지키는 건 약과야', year:2022, size:'48×48cm' },
   { file:'bugui.jpg',            title:'부귀화조도 富貴花鳥圖',                    year:2022, size:'175×54cm' },
 ];
+const works = Array.isArray(_D.works) && _D.works.length ? _D.works : fallbackWorks;
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, char => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;'
+  })[char]);
+}
+
+function assetPath(file) {
+  const value = String(file || '');
+  return /^(?:https?:|data:|\/)/i.test(value) ? value : './' + encodeURI(value);
+}
 
 /* ── 작품 그리드 ── */
 function renderWorks() {
-  document.getElementById('worksGrid').innerHTML = works.map((w,i) => {
-    const displayTitle = currentLang === 'en' && worksEN[w.file] ? worksEN[w.file] : w.title;
-    return `<div class="wcard" onclick="openLb(${i})">
-      <div class="wcard-img" style="background-image:url('./${w.file}')"></div>
+  const grid = document.getElementById('worksGrid');
+  grid.innerHTML = works.map((w,i) => {
+    const displayTitle = currentLang === 'en' ? (w.titleEn || worksEN[w.file] || w.title) : (w.titleKo || w.title);
+    return `<button type="button" class="wcard" data-work-index="${i}" aria-label="${escapeHTML(displayTitle)}">
+      <img class="wcard-img" data-work-image="${i}" src="${escapeHTML(assetPath(w.file))}" alt="${escapeHTML(displayTitle)}" loading="lazy" decoding="async">
+      <span class="wcard-fallback">${escapeHTML(displayTitle)}</span>
       <div class="wcard-overlay">
-        <p class="wc-t">${displayTitle}</p>
-        <p class="wc-m">${w.year} · ${w.size}</p>
+        <p class="wc-t">${escapeHTML(displayTitle)}</p>
+        <p class="wc-m">${escapeHTML(w.year)} · ${escapeHTML(w.size)}</p>
       </div>
-    </div>`;
+    </button>`;
   }).join('');
+  grid.querySelectorAll('.wcard').forEach(card => {
+    card.addEventListener('click', () => openLb(Number(card.dataset.workIndex)));
+  });
+  grid.querySelectorAll('.wcard-img').forEach(img => {
+    img.addEventListener('error', () => {
+      const w = works[Number(img.dataset.workImage)];
+      if (w?.fallbackFile && img.dataset.fallbackTried !== 'true') {
+        img.dataset.fallbackTried = 'true';
+        img.src = assetPath(w.fallbackFile);
+        return;
+      }
+      img.closest('.wcard')?.classList.add('image-missing');
+      img.remove();
+    });
+  });
 }
-renderWorks();
 
 /* ── 라이트박스 ── */
 let lbIdx = 0;
 function openLb(i) {
   lbIdx = i;
   const w = works[i];
-  document.getElementById('lbImg').src = './' + w.file;
-  document.getElementById('lbImg').alt = w.title;
+  const lbImg = document.getElementById('lbImg');
+  lbImg.style.display = '';
+  lbImg.dataset.fallbackTried = 'false';
+  lbImg.src = assetPath(w.file);
+  lbImg.alt = currentLang === 'en' ? (w.titleEn || worksEN[w.file] || w.title) : (w.titleKo || w.title);
   document.getElementById('lbYear').textContent = w.year + (w.medium ? ' · ' + w.medium : '');
-  const enTitle = worksEN[w.file];
+  const enTitle = w.titleEn || worksEN[w.file];
   document.getElementById('lbTitle').innerHTML = currentLang === 'en' && enTitle
     ? enTitle + '<br><span style="font-size:.7em;opacity:.5;font-weight:400">' + w.title + '</span>'
     : w.title;
   document.getElementById('lbDetail').innerHTML = w.size + (w.medium ? '<br>' + w.medium : '') + '<br>박기량 Park Kiryang';
   document.getElementById('lb').classList.add('open');
+  document.getElementById('lb').setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
 function closeLb() {
   document.getElementById('lb').classList.remove('open');
+  document.getElementById('lb').setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   setTimeout(() => { document.getElementById('lbImg').src = ''; }, 350);
 }
@@ -1022,6 +1137,16 @@ document.getElementById('lbNext').onclick = () => moveLb(1);
 document.getElementById('lb').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeLb();
 });
+document.getElementById('lbImg').addEventListener('error', e => {
+  const img = e.currentTarget;
+  const w = works[lbIdx];
+  if (w?.fallbackFile && img.dataset.fallbackTried !== 'true') {
+    img.dataset.fallbackTried = 'true';
+    img.src = assetPath(w.fallbackFile);
+    return;
+  }
+  img.style.display = 'none';
+});
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lb').classList.contains('open')) return;
   if (e.key === 'Escape') closeLb();
@@ -1029,27 +1154,37 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') moveLb(1);
 });
 
-/* ── hero-r 배경 강제 적용 ── */
-(function(){
-  var hr = document.querySelector('.hero-r');
-  if(hr){
-    hr.style.setProperty('background-image','url("./gyeonggye.jpg")','important');
-    hr.style.setProperty('background-size','cover','important');
-    hr.style.setProperty('background-position','center top','important');
-  }
-})();
-
 /* ── NAV 스크롤 ── */
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('sc', scrollY > 60);
 }, { passive: true });
 
+const nav = document.getElementById('nav');
+const menuToggle = document.getElementById('menuToggle');
+menuToggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('menu-open');
+  menuToggle.setAttribute('aria-expanded', String(open));
+});
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
+document.getElementById('btnKO').addEventListener('click', () => setLang('ko'));
+
 /* ── 스크롤 리빌 ── */
-const obs = new IntersectionObserver(
-  es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
-  { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
-);
-document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+if ('IntersectionObserver' in window) {
+  const obs = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+    { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
+  );
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+} else {
+  document.documentElement.classList.remove('reveal-ready');
+}
 
 /* ── 언어 전환 ── */
 const LANG = {
@@ -1058,19 +1193,19 @@ const LANG = {
     navLinks: ['Statement','Works','CV','About','Contact'],
     /* HERO */
     heroLabel: 'Contemporary Painting Rooted in Minhwa',
-    heroSub: 'Emotions that resist language<br>rendered as scenes.<br><br style="line-height:.5">Rooted in the painting methods of Minhwa,<br>I translate the movement of feeling and self<br>into contemporary painting.',
+    heroSub: 'I translate pre-verbal emotions<br>into scenes.<br><br style="line-height:.5">Using colouring methods learned from Minhwa,<br>I paint the movements of emotion and self<br>in a contemporary pictorial language.',
     heroBtn1: 'Works', heroBtn2: 'CV',
+    menu: 'Menu', close: 'Close', previous: 'Previous artwork', next: 'Next artwork',
     /* STATEMENT */
     stmtLabel: 'Artist Statement',
-    stmtQ: 'I paint what remains of emotions<br>that have no name yet.',
-    stmtB: `Anxiety, longing, endurance, release, movement again.<br>
-Emotions rarely resolve into a single word — they stay layered in the body, in memory, in objects and landscapes.<br>
-I translate that ambiguity into scenes and figures on the canvas.<br><br>
-'Ollangi,' who reappears across my works, is a painterly subject who moves through these emotions — a baby tiger who crouches, gazes, endures, and departs in my place. Less a character with a fixed meaning, more an alter ego that shifts with each painting, experiencing a different emotion each time.<br><br>
-Recent works expand this vocabulary beyond Ollangi: hearts, jars, plants, water, orbits. Familiar objects drift away from their original meanings and become new scenes where personal memory and feeling can settle.<br><br>
-Minhwa is where this practice began and how I approach painting. Rather than repeating traditional symbols, I carry forward the sensibility of layering colour on hanji, building density through barim and meticulous brushwork, combining sugan bunchae, seokchae, and gouache to connect an ancient method of painting with a contemporary sensibility.<br><br>
-I do not try to offer answers about emotions. Instead I want to build scenes where unsettled feelings can rest for a moment. When a viewer finds their own memory or feeling inside, the painting begins again.`,
-    stmtKeyword: 'Emotion · Self · Scene · Layer · Ollangi',
+    stmtQ: 'I paint the forms in which emotions<br>without clear names remain.',
+    stmtB: `Moments of anxiety, burning longing, endurance, letting go, and moving again.<br>
+Emotions rarely resolve into a single word. They remain layered in the body and memory, in objects and landscapes. I translate those ambiguous states into scenes and figures on the painting surface.<br><br>
+Ollangi, who appears repeatedly in my work, is the pictorial subject who moves through these emotions. Taking the form of a baby tiger, Ollangi crouches, gazes, endures, and departs in my place. Rather than a character with a fixed personality or message, Ollangi is closer to another self—one that changes from painting to painting while experiencing a different emotion each time.<br><br>
+My recent work expands these emotional states through forms beyond Ollangi, including hearts, jars, plants, water, and orbits. Familiar objects gradually shed their original meanings and become new scenes in which personal memory and emotion can dwell.<br><br>
+Minhwa is the starting point of my practice and one of the ways I approach painting. Instead of repeating traditional symbols, I carry forward its sensibility of colour: layering pigments on jangji, applying barim gradations, and building density through meticulous, repeated brushwork. By combining sugan bunchae, mineral pigments, and gouache, I connect traditional painting methods with a contemporary sensibility.<br><br>
+I do not try to provide answers to emotion through my work. I want to create scenes where feelings that have not yet settled can remain for a while. When viewers discover their own memories and emotions within them, the meaning of the painting begins anew.`,
+    keywordLabel: 'Keywords', stmtKeyword: 'Emotion · Self · Scene · Layer · Ollangi',
     /* WORKS */
     worksLabel: 'Portfolio', worksTitle: 'Works',
     filterAll: 'All',
@@ -1086,24 +1221,26 @@ I do not try to offer answers about emotions. Instead I want to build scenes whe
     /* ABOUT */
     aboutLabel: 'About',
     aboutEn: 'Park Kiryang',
-    aboutBio: `Park Kiryang is a painter working with emotional states and moments of self-recognition.<br><br>
-Through figures such as 'Ollangi' — a baby tiger — alongside hearts, jars, plants, landscapes and everyday objects, she translates the inner movements that resist clear articulation into visual scenes.<br><br>
-She began painting in 2018 through traditional Minhwa. Rather than repeating inherited symbols, she has since extended the painterly methods she developed — working on hanji with sugan bunchae, seokchae, and the layering technique of barim — into a contemporary visual language.<br><br>
-Today her practice spans painting, participatory projects, and experimentation with three-dimensional and digital forms, exploring how individual emotion meets the experience of others. She works simultaneously as an artist and a cultural-arts organiser, continuing a sustained inquiry into emotion through paintings, exhibitions, and projects.`,
+    aboutBio: `Park Kiryang paints emotional states and moments of self-recognition. Through figures such as Ollangi—a baby tiger—alongside hearts, jars, plants, landscapes, and everyday objects, she turns inner movements that are difficult to articulate into visual scenes.<br><br>
+She began painting in 2018 by studying traditional Minhwa. Rather than reiterating its inherited symbols, she has extended the methods she learned through jangji, sugan bunchae, mineral pigments, barim gradations, and repeated layering into a contemporary pictorial language.<br><br>
+Her practice now spans painting, participatory projects, and experiments with three-dimensional and digital media, exploring how individual emotion meets the experience of others. Working as both an artist and a cultural-arts planner, she continues her inquiry into emotion through paintings, exhibitions, and projects.`,
     actLabel: 'Activities', actTitle: 'Current Practice',
-    collectLabel: '소장', collectVal: 'Gyeongsangbuk-do Office, Jeonnam Cultural Foundation Arts Bank, Suncheon City (Suncheon Cultural Foundation), Private collections',
-    eduLabel: '학력', eduVal: 'B.F.A. Visual Information Design, Chonnam National University',
+    collectLabel: 'Collections', collectVal: 'Gyeongsangbuk-do Provincial Government; Namdo Art Bank, Jeonnam Cultural Foundation; Suncheon City (Suncheon Cultural Foundation); private collections',
+    eduLabel: 'Education', eduVal: 'B.F.A. in Visual Information Design, Chonnam National University',
     practiceLabel: 'Practice',
     practiceVal: 'Painting · Participatory Projects<br>Object &amp; Digital Experimentation',
     /* CONNECT */
-    connLabel: 'Contact', connTitle: 'See more of the work',
+    connLabel: 'Contact', connTitle: 'See more<br>of the work',
+    footerTagline: 'Contemporary Painting Rooted in Minhwa',
+    marquee: ['Ollangi','Broken Mirror','My Chronicle','Rebirth','Contemporary Painting Rooted in Minhwa','Sugan Bunchae','Mineral Pigments','Park Kiryang','Emotional Resolution','Facing Sounds'],
   },
   ko: {
     navLinks: ['작가 노트','작품','CV','소개','연결'],
     heroLabel: '민화에 뿌리를 둔 동시대 회화',
     heroSub: '말이 되기 전의 감정을<br>장면으로 옮깁니다.<br><br style="line-height:.5">민화에서 익힌 채색의 방법을 바탕으로<br>감정과 자아의 움직임을<br>동시대의 회화로 그립니다.',
     heroBtn1: '작품', heroBtn2: 'CV',
-    stmtLabel: 'Artist Statement',
+    menu: '메뉴', close: '닫기', previous: '이전 작품', next: '다음 작품',
+    stmtLabel: '작가 노트',
     stmtQ: '나는 아직 명확한 이름을 갖지 못한 감정이<br>어떤 형태로 남는지 그린다.',
     stmtB: `불안하고, 애가 타고, 버티고, 놓아주고, 다시 움직이는 순간들.<br>
 감정은 언제나 하나의 단어로 정리되기보다 몸과 기억, 사물과 풍경 속에 여러 겹으로 남는다.
@@ -1118,7 +1255,7 @@ Today her practice spans painting, participatory projects, and experimentation w
 나는 작품을 통해 감정의 답을 제시하려 하지 않는다.
 대신 아직 정리되지 않은 마음이 잠시 머물 수 있는 장면을 만들고자 한다.
 관객이 그 안에서 자신의 기억과 감정을 발견하는 순간, 그림의 의미는 다시 시작된다.`,
-    stmtKeyword: '감정 / 자아 / 장면 / 층위 / 올랑이',
+    keywordLabel: '키워드', stmtKeyword: '감정 / 자아 / 장면 / 층위 / 올랑이',
     worksLabel: 'Portfolio', worksTitle: '작품',
     filterAll: '전체',
     stat1: '작품 등록', stat2: '시리즈', stat3: '활동 시작',
@@ -1140,135 +1277,146 @@ Today her practice spans painting, participatory projects, and experimentation w
     actLabel: '현재 활동', actTitle: '현재 활동',
     collectLabel: '소장', collectVal: '경상북도청, 전남문화재단 남도예술은행, 순천시(순천문화재단), 개인소장 다수',
     eduLabel: '학력', eduVal: '전남대학교 시각정보디자인 미술학사',
-    practiceLabel: 'Practice',
-    practiceVal: 'Painting · Participatory Projects<br>Object &amp; Digital Experimentation',
+    practiceLabel: '작업 영역',
+    practiceVal: '회화 · 관객 참여형 프로젝트<br>오브제 · 디지털 실험',
     connLabel: '연결', connTitle: '작업을 더<br>가까이서',
+    footerTagline: '민화에 뿌리를 둔 동시대 회화',
+    marquee: ['올랑이','파경 破鏡','나의 연대기','부활 復活','민화에 뿌리를 둔 동시대 회화','수간분채','석채','Park Kiryang','정서의 해상도','마주보는 소리'],
   }
 };
 
-let currentLang = 'en';
+const itemTranslations = {
+  '순천문화재단 일상문화예술실험실 공모 대상': 'Grand Prize — Everyday Arts Lab, Suncheon Cultural Foundation',
+  '제 11회 대한민국민화대전 특선': 'Special Selection — 11th Korean Minhwa Grand Exhibition',
+  '제 10회 대한민국민화대전 입선': 'Selected — 10th Korean Minhwa Grand Exhibition',
+  '광양문화도시센터 원님길 조성사업 공모전 최우수상': 'Top Excellence Award — Wonnim-gil Project, Gwangyang Culture City Center',
+  '제 7회 대한민국민화대전 특선': 'Special Selection — 7th Korean Minhwa Grand Exhibition',
+  '연필한자루 <프롬프트를 입력하세요> 참여': 'Participant — Enter a Prompt, Yeonpil Hanjaryu',
+  '갤러리142 <월간예술가의 작업실> 참여': 'Participant — Monthly Artist Studio, Gallery 142',
+  '광양시특수교육지원센터 <지켜주는 민화> 출강': 'Instructor — Protective Minhwa, Gwangyang Special Education Support Center',
+  '전남문화재단 모두의문화예술교육 <마음존중 탐구생활>': 'Arts Education for All: Exploring Emotional Respect, Jeonnam Cultural Foundation',
+  '순천문화재단 일상문화예술실험실 수상작 <도깨비불 밝혀라>': 'Award Project — Light the Goblin Fire, Everyday Arts Lab, Suncheon Cultural Foundation',
+  '순천문화재단 기획자양성과정 <마음을 일궈요, 감정텃밭>': 'Curator Development Program: Cultivating the Heart, Suncheon Cultural Foundation',
+  '전남문화재단 청년예술가 활동지원사업 <듣는 민화, 보는 국악>': 'Young Artist Support: Listening to Minhwa, Seeing Gugak, Jeonnam Cultural Foundation',
+  '전남문화재단 모두의문화예술교육 <다문화 속 색다른 문화이야기>': 'Arts Education for All: Different Cultural Stories in a Multicultural World, Jeonnam Cultural Foundation',
+  '광양시 예비문화도시사업 <시민궁리랩> 문화원님길 참여': 'Participant — Citizens’ Idea Lab: Munhwa Wonnim-gil, Gwangyang Preliminary Culture City Project',
+  "정채봉문학테마길 조성사업 '눈을 감고 보는 길' 민화 타일벽화": 'Minhwa Tile Mural — A Path Seen with Closed Eyes, Jeong Chae-bong Literary Theme Trail',
+};
+
+const activityTranslations = {
+  '한국미술협회 광양지부 14대 사무국장': 'Secretary-General, 14th Executive Board, Gwangyang Branch, Korean Fine Arts Association',
+  '한국미술협회 전남지회 청년위원장': 'Chair, Young Artists Committee, Jeonnam Branch, Korean Fine Arts Association',
+  '전남문화재단 남도예술은행 in 렌트 작가 선정 (2026)': 'Selected Artist, Namdo Art Bank in-Rent, Jeonnam Cultural Foundation (2026)',
+  '노인복지관 민화강사': 'Minhwa Instructor, Senior Welfare Center',
+  '순천문화재단 캐릭터사업 위촉작가': 'Commissioned Artist, Character Project, Suncheon Cultural Foundation',
+  "'민화의 정원' 전시 기획 및 마케팅 다수": 'Exhibition Planning and Marketing, Garden of Minhwa',
+  "'올랑이를 그리는 페인터 박기량'으로 국내외 미술시장에서 입지 구축": 'Building a presence in Korean and international art markets as the painter behind Ollangi',
+};
+
+const activityTagTranslations = {
+  'NOW':'CURRENT', '강의':'TEACHING', '위촉':'COMMISSION', '기획':'CURATION', '목표':'FOCUS'
+};
+
+function renderMarquee(terms) {
+  const t = document.getElementById('mqT');
+  t.innerHTML = [...terms,...terms].map(s => `<span class="mq-i">${escapeHTML(s)}</span>`).join('');
+}
 
 function setLang(lang) {
-  currentLang = lang;
-  const L = LANG[lang];
-  const isKo = lang === 'ko';
+  currentLang = LANG[lang] ? lang : 'en';
+  const L = LANG[currentLang];
+  const isKo = currentLang === 'ko';
 
-  // 버튼 활성
-  document.getElementById('btnEN').classList.toggle('active', lang==='en');
-  document.getElementById('btnKO').classList.toggle('active', lang==='ko');
+  const btnEN = document.getElementById('btnEN');
+  const btnKO = document.getElementById('btnKO');
+  btnEN.classList.toggle('active', !isKo);
+  btnKO.classList.toggle('active', isKo);
+  btnEN.setAttribute('aria-pressed', String(!isKo));
+  btnKO.setAttribute('aria-pressed', String(isKo));
+  menuToggle.textContent = L.menu;
 
-  // NAV 링크
-  document.querySelectorAll('.nav-links a').forEach((a,i) => { if(L.navLinks[i]) a.textContent = L.navLinks[i]; });
-
-  // HERO
+  document.querySelectorAll('.nav-links a').forEach((a,i) => { if (L.navLinks[i]) a.textContent = L.navLinks[i]; });
   document.querySelector('.h-label').textContent = L.heroLabel;
   document.querySelector('.h-sub').innerHTML = L.heroSub;
   const heroBtns = document.querySelectorAll('.h-btns .btn');
-  if(heroBtns[0]) heroBtns[0].textContent = L.heroBtn1;
-  if(heroBtns[1]) heroBtns[1].textContent = L.heroBtn2;
+  if (heroBtns[0]) heroBtns[0].textContent = L.heroBtn1;
+  if (heroBtns[1]) heroBtns[1].textContent = L.heroBtn2;
 
-  // STATEMENT
   document.querySelector('.stmt-in .label').textContent = L.stmtLabel;
   document.querySelector('.stmt-q').innerHTML = L.stmtQ;
   document.querySelector('.stmt-b').innerHTML = L.stmtB;
   const kw = document.querySelector('.stmt-keyword');
-  if(kw) kw.innerHTML = '<em style="font-style:normal;color:var(--teal);font-weight:500;">Keywords</em>&nbsp;&nbsp;' + L.stmtKeyword;
+  if (kw) kw.innerHTML = `<em style="font-style:normal;color:var(--teal);font-weight:500;">${L.keywordLabel}</em>&nbsp;&nbsp;${L.stmtKeyword}`;
 
-  // WORKS
   document.querySelector('#works .label').textContent = L.worksLabel;
   document.querySelector('#works .heading').textContent = L.worksTitle;
-  const fbAll = document.querySelector('.fb[data-f="all"]');
-  if(fbAll) fbAll.textContent = L.filterAll;
-
-  // STATS
-  const statLabels = document.querySelectorAll('.stat-l');
-  [L.stat1, L.stat2, L.stat3].forEach((t,i) => { if(statLabels[i]) statLabels[i].textContent = t; });
-
-  // EXHIBITIONS
   document.querySelector('#exhibitions .label').textContent = L.exLabel;
   document.querySelector('#exhibitions .heading').textContent = L.exTitle;
-  const tabAll = document.querySelector('.ex-tab[data-y="all"]');
-  if(tabAll) tabAll.textContent = L.exTabAll;
+  document.querySelector('.ex-tab[data-y="all"]').textContent = L.exTabAll;
 
-  // awards
   const awTitles = document.querySelectorAll('.aw-l .heading, .aw-r .heading');
-  if(awTitles[0]) awTitles[0].textContent = L.awardsTitle;
-  if(awTitles[1]) awTitles[1].textContent = L.projectsTitle;
   const awLabels = document.querySelectorAll('.aw-l .label, .aw-r .label');
-  if(awLabels[0]) awLabels[0].textContent = L.awardsLabel;
-  if(awLabels[1]) awLabels[1].textContent = L.projectsLabel;
+  awTitles[0].textContent = L.awardsTitle;
+  awTitles[1].textContent = L.projectsTitle;
+  awLabels[0].textContent = L.awardsLabel;
+  awLabels[1].textContent = L.projectsLabel;
+  document.querySelectorAll('.ap-text').forEach(el => {
+    if (!el.dataset.ko) el.dataset.ko = el.textContent.trim();
+    el.textContent = isKo ? el.dataset.ko : (itemTranslations[el.dataset.ko] || el.dataset.ko);
+  });
 
-  // ABOUT
   document.querySelector('#about .ab-l .label').textContent = L.aboutLabel;
   document.querySelector('.ab-bio').innerHTML = L.aboutBio;
   const infoKeys = document.querySelectorAll('.ab-info-key');
   const infoVals = document.querySelectorAll('.ab-info-val');
-  if(infoKeys[0]) infoKeys[0].textContent = L.eduLabel;
-  if(infoVals[0]) infoVals[0].textContent = L.eduVal;
-  if(infoKeys[1]) infoKeys[1].textContent = L.collectLabel;
-  if(infoVals[1]) infoVals[1].textContent = L.collectVal;
+  infoKeys[0].textContent = L.eduLabel;
+  infoVals[0].textContent = L.eduVal;
+  infoKeys[1].textContent = L.collectLabel;
+  infoVals[1].textContent = L.collectVal;
 
-  // ABOUT-R
   document.querySelector('#about .ab-r .label').textContent = L.actLabel;
+  document.querySelector('#about .ab-r .heading').textContent = L.actTitle;
+  document.querySelector('.practice-label').textContent = L.practiceLabel;
+  document.querySelector('.practice-value').innerHTML = L.practiceVal;
+  document.querySelectorAll('.act-text').forEach(el => {
+    if (!el.dataset.ko) el.dataset.ko = el.textContent.trim();
+    el.textContent = isKo ? el.dataset.ko : (activityTranslations[el.dataset.ko] || el.dataset.ko);
+  });
+  document.querySelectorAll('.act-tag').forEach(el => {
+    if (!el.dataset.ko) el.dataset.ko = el.textContent.trim();
+    el.textContent = isKo ? el.dataset.ko : (activityTagTranslations[el.dataset.ko] || el.dataset.ko);
+  });
 
-  // CONNECT
-  const connLabel = document.querySelector('#connect .label');
-  if(connLabel) connLabel.textContent = L.connLabel;
-  const connTitle = document.querySelector('.conn-title');
-  if(connTitle) connTitle.innerHTML = L.connTitle;
+  document.querySelector('#connect .label').textContent = L.connLabel;
+  document.querySelector('.conn-title').innerHTML = L.connTitle;
+  document.getElementById('footerTagline').textContent = L.footerTagline;
+  document.getElementById('lbClose').textContent = `✕ ${L.close}`;
+  document.getElementById('lbPrev').setAttribute('aria-label', L.previous);
+  document.getElementById('lbNext').setAttribute('aria-label', L.next);
+  document.getElementById('lb').setAttribute('aria-label', isKo ? '작품 상세' : 'Artwork details');
 
-  // 전시 re-render (배지 라벨 변경)
   window._typeLabel = L.typeLabel;
   renderEx(document.querySelector('.ex-tab.on')?.dataset?.y || 'all');
   renderWorks();
-  // 수상 항목 번역
-  const awardsMap = {
-    '순천문화재단 일상문화예술실험실 공모 대상': 'Grand Prize — Suncheon Cultural Foundation Everyday Arts Lab',
-    '제 11회 대한민국민화대전 특선': 'Excellence Award — 11th Korean Minhwa Grand Exhibition',
-    '제 10회 대한민국민화대전 입선': 'Selected — 10th Korean Minhwa Grand Exhibition',
-    '광양문화도시센터 원님길 조성사업 공모전 최우수상': 'Best Award — Gwangyang Culture City Wonnim-gil Project',
-    '제 7회 대한민국민화대전 특선': 'Excellence Award — 7th Korean Minhwa Grand Exhibition',
-  };
-  const projectsMap = {
-    '연필한자루 &lt;프롬프트를 입력하세요&gt; 참여': 'Yeonpil Hanjarou ⟨Enter a Prompt⟩ — Participant',
-    '갤러리142 &lt;월간예술가의 작업실&gt; 참여': 'Gallery 142 ⟨Monthly Artist Studio⟩ — Participant',
-    '광양시특수교육지원센터 &lt;지켜주는 민화&gt; 출강': 'Gwangyang Special Education Center — ⟨Protective Minhwa⟩ Instructor',
-    '전남문화재단 모두의문화예술교육 &lt;마음존중 탐구생활&gt;': 'Jeonnam Foundation — ⟨Exploring Emotional Respect⟩',
-    '순천문화재단 일상문화예술실험실 수상작 &lt;도깨비불 밝혀라&gt;': 'Suncheon Foundation — ⟨Light the Goblin Fire⟩ (Award Project)',
-    '순천문화재단 기획자양성과정 &lt;마음을 일궈요, 감정텃밭&gt;': 'Suncheon Foundation Curator Program — ⟨Cultivating the Heart⟩',
-    '전남문화재단 청년예술가 활동지원사업 &lt;듣는 민화, 보는 국악&gt;': 'Jeonnam Foundation Young Artist — ⟨Listening Minhwa, Seeing Gugak⟩',
-    '전남문화재단 모두의문화예술교육 &lt;다문화 속 색다른 문화이야기&gt;': 'Jeonnam Foundation — ⟨Multicultural Stories⟩',
-    '광양시 예비문화도시사업 &lt;시민궁리랩&gt; 문화원님길 참여': 'Gwangyang Culture City — Citizens Lab ⟨Wonnim-gil⟩',
-    '정채봉문학테마길 조성사업 '눈을 감고 보는 길' 민화 타일벽화': 'Jeong Chae-bong Literary Path — Minhwa Tile Mural',
-  };
-  if(isKo) return;
-  document.querySelectorAll('.ap-text').forEach(el => {
-    const txt = el.innerHTML;
-    if(awardsMap[txt]) el.textContent = awardsMap[txt];
-    else if(projectsMap[txt]) el.textContent = projectsMap[txt];
-  });
+  renderMarquee(L.marquee);
 
-  // HTML lang 속성
-  document.documentElement.lang = isKo ? 'ko' : 'en';
-
-  // localStorage 저장
-  try { localStorage.setItem('kiki_lang', lang); } catch(e){}
+  document.documentElement.lang = currentLang;
+  document.title = isKo ? '박기량 — 민화에 뿌리를 둔 동시대 회화' : 'Park Kiryang — Contemporary Painting Rooted in Minhwa';
+  const description = document.querySelector('meta[name="description"]');
+  if (description) description.content = isKo
+    ? '민화에 뿌리를 둔 동시대 회화 작가 박기량의 공식 포트폴리오.'
+    : 'The official portfolio of Park Kiryang, a contemporary painter rooted in Minhwa.';
+  try { localStorage.setItem('kiki_lang', currentLang); } catch(e) {}
 }
 
-/* ── 마퀴 ── */
-
-const terms = ['올랑이','파경 破鏡','나의 연대기','부활 復活','민화기반 동시대회화','수간분채','수간석채','Park Kiryang','박기량','마주보는 소리'];
-const t = document.getElementById('mqT');
-t.innerHTML = [...terms,...terms].map(s => `<span class="mq-i">${s}</span>`).join('');
-
 document.getElementById('cr').textContent = `© ${new Date().getFullYear()} 박기량 Park Kiryang. All rights reserved.`;
-
-renderEx('all');
 
 /* ── 언어 초기화 ── */
 (function(){
   const saved = (() => { try { return localStorage.getItem('kiki_lang'); } catch(e){ return null; } })();
-  setLang(saved === 'ko' ? 'ko' : 'en');
+  const browserLang = String(navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en';
+  setLang(saved === 'ko' || saved === 'en' ? saved : browserLang);
+})();
 })();
 </script>
 </body>

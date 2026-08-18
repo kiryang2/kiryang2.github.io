@@ -137,7 +137,7 @@
   .h-label{
     font-size:0.68rem;font-weight:500;
     letter-spacing:0.24em;text-transform:uppercase;
-    color:var(--rust-l);margin-bottom:2rem;
+    color:var(--teal-l);margin-bottom:2rem;
     opacity:0;animation:up .9s .35s var(--ease) forwards;
   }
   .h-kr{
@@ -647,6 +647,9 @@
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-studio-bg"></div>
+  <div class="hero-overlay"></div>
+
   <div class="hero-l">
     <p class="h-label">Contemporary Painting Rooted in Minhwa</p>
     <h1 class="h-kr">박기량</h1>
@@ -1028,16 +1031,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') moveLb(-1);
   if (e.key === 'ArrowRight') moveLb(1);
 });
-
-/* ── hero-r 배경 강제 적용 ── */
-(function(){
-  var hr = document.querySelector('.hero-r');
-  if(hr){
-    hr.style.setProperty('background-image','url("./gyeonggye.jpg")','important');
-    hr.style.setProperty('background-size','cover','important');
-    hr.style.setProperty('background-position','center top','important');
-  }
-})();
 
 /* ── NAV 스크롤 ── */
 window.addEventListener('scroll', () => {

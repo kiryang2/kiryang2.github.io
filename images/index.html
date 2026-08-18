@@ -109,31 +109,29 @@
     display:grid;grid-template-columns:1fr 1fr;
     background:var(--ink);overflow:hidden;position:relative;
   }
-  /* 전체 배경 — 작품 텍스처 레이어 */
-  .hero-texture{
+  /* 작업사진 전체 배경 */
+  .hero-studio-bg{
     position:absolute;inset:0;z-index:0;
-    display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr);
+    background-image:url('./studio.jpg');
+    background-size:cover;
+    background-position:center top;
   }
-  .hero-texture-item{
-    background-size:cover;background-position:center;
-    opacity:.09;
-    filter:saturate(.5) brightness(.8);
-  }
-  /* 전체 오버레이 */
+  /* 배경 위 그라데이션 오버레이 — 왼쪽 진하게, 오른쪽 서서히 밝아짐 */
   .hero-overlay{
     position:absolute;inset:0;z-index:1;
     background:linear-gradient(
-      110deg,
-      rgba(20,27,60,.95) 0%,
-      rgba(20,27,60,.88) 40%,
-      rgba(20,27,60,.75) 65%,
-      rgba(20,27,60,.82) 100%
+      105deg,
+      rgba(20,27,60,.97) 0%,
+      rgba(20,27,60,.92) 32%,
+      rgba(20,27,60,.65) 55%,
+      rgba(20,27,60,.25) 75%,
+      rgba(20,27,60,.1) 100%
     );
   }
 
   .hero-l{
     display:flex;flex-direction:column;justify-content:center;
-    padding:5rem 4.5rem 5rem;
+    padding:5rem 5rem 5rem 5.5rem;
     position:relative;z-index:2;
   }
   .h-label{
@@ -185,8 +183,8 @@
 
   .hero-r{
     position:relative;z-index:2;
-    display:flex;align-items:flex-end;justify-content:center;
-    padding:0 3rem 4rem;
+    display:flex;align-items:flex-end;justify-content:flex-end;
+    padding:0 5rem 5rem 0;
   }
   .hero-r::before{display:none;}
   .hero-r::after{display:none;}
@@ -220,6 +218,20 @@
       rgba(0,0,0,.3) 78%,
       transparent 100%
     );
+  }
+  .hero-signature{
+    text-align:right;
+    opacity:0;
+    animation:fi 1s 1.2s forwards;
+  }
+  .hero-sig-name{
+    font-size:1.1rem;font-weight:600;
+    color:rgba(255,255,255,.9);
+    letter-spacing:.08em;margin-bottom:.3rem;
+  }
+  .hero-sig-en{
+    font-size:.72rem;font-weight:400;
+    color:var(--teal);letter-spacing:.2em;text-transform:uppercase;
   }
   @keyframes profileIn{
     from{opacity:0;transform:translateY(20px);}
@@ -648,11 +660,9 @@
   </div>
 
   <div class="hero-r">
-    <div class="hero-profile-wrap">
-      <img class="hero-profile-img" src="./profile.jpg" alt="박기량 Park Kiryang"
-        onerror="this.style.display='none'">
-      <div class="hero-profile-deco"></div>
-      <div class="hero-profile-deco2"></div>
+    <div class="hero-signature">
+      <p class="hero-sig-name">박기량</p>
+      <p class="hero-sig-en">Park Kiryang</p>
     </div>
   </div>
 
@@ -915,6 +925,31 @@ document.querySelectorAll('.ex-tab').forEach(btn => {
 });
 
 /* ── 작품 데이터 ── */
+// 작품 영문 제목
+const worksEN = {
+  'hae-hangari.jpg':     'Harmful Jar',
+  'hae-hangari-ihu.jpg': 'After the Harmful Jar',
+  'dasi-saengil2.jpg':   'Birthday, Again 2',
+  'haebang.jpg':         'Day of Liberation',
+  'haebang2.jpg':        'Day of Liberation 2',
+  'haebang3.jpg':        'Day of Liberation 3',
+  'wegov.jpg':           'We Go V',
+  'jungseo.jpg':         'Resolution of Emotion',
+  'sayoo.jpg':           'Flow of Thought',
+  'jikyeo-olang.jpg':    'Protective Minhwa: Ollangi on the Road',
+  'hoebogui-sup .jpg':   'Forest of Recovery',
+  'sumul-got.jpg':       'A Place to Hide',
+  'dasi-saengil.jpg':    'Birthday, Again',
+  'gyeonggye.jpg':       'Garden of Boundaries',
+  'gilsang-gido.jpg':    'Orbit Without Fortune',
+  'gilsangburn.jpg':     'While the Fortune Burns',
+  'pajyeong.jpg':        'Broken Mirror',
+  'ujoo.jpg':            'Before the Universe, Humility',
+  'yeoniip.jpg':         'Ollangi on Lotus Leaf',
+  'gyeomson.jpg':        'Humility',
+  'olang-yakgwa.jpg':    "Ollangi, Protecting You Is Nothing",
+  'bugui.jpg':           'Painting of Wealth and Birds',
+};
 const works = [
   { file:'hae-hangari.jpg',      title:'해害 항아리',                              year:2026, size:'P12' },
   { file:'hae-hangari-ihu.jpg',  title:'해害 항아리 이후',                         year:2026, size:'53×41cm' },
@@ -942,15 +977,19 @@ const works = [
 ];
 
 /* ── 작품 그리드 ── */
-document.getElementById('worksGrid').innerHTML = works.map((w,i) =>
-  `<div class="wcard" onclick="openLb(${i})">
-    <div class="wcard-img" style="background-image:url('./${w.file}')"></div>
-    <div class="wcard-overlay">
-      <p class="wc-t">${w.title}</p>
-      <p class="wc-m">${w.year} · ${w.size}</p>
-    </div>
-  </div>`
-).join('');
+function renderWorks() {
+  document.getElementById('worksGrid').innerHTML = works.map((w,i) => {
+    const displayTitle = currentLang === 'en' && worksEN[w.file] ? worksEN[w.file] : w.title;
+    return `<div class="wcard" onclick="openLb(${i})">
+      <div class="wcard-img" style="background-image:url('./${w.file}')"></div>
+      <div class="wcard-overlay">
+        <p class="wc-t">${displayTitle}</p>
+        <p class="wc-m">${w.year} · ${w.size}</p>
+      </div>
+    </div>`;
+  }).join('');
+}
+renderWorks();
 
 /* ── 라이트박스 ── */
 let lbIdx = 0;
@@ -960,7 +999,10 @@ function openLb(i) {
   document.getElementById('lbImg').src = './' + w.file;
   document.getElementById('lbImg').alt = w.title;
   document.getElementById('lbYear').textContent = w.year + (w.medium ? ' · ' + w.medium : '');
-  document.getElementById('lbTitle').textContent = w.title;
+  const enTitle = worksEN[w.file];
+  document.getElementById('lbTitle').innerHTML = currentLang === 'en' && enTitle
+    ? enTitle + '<br><span style="font-size:.7em;opacity:.5;font-weight:400">' + w.title + '</span>'
+    : w.title;
   document.getElementById('lbDetail').innerHTML = w.size + (w.medium ? '<br>' + w.medium : '') + '<br>박기량 Park Kiryang';
   document.getElementById('lb').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1178,6 +1220,33 @@ function setLang(lang) {
   // 전시 re-render (배지 라벨 변경)
   window._typeLabel = L.typeLabel;
   renderEx(document.querySelector('.ex-tab.on')?.dataset?.y || 'all');
+  renderWorks();
+  // 수상 항목 번역
+  const awardsMap = {
+    '순천문화재단 일상문화예술실험실 공모 대상': 'Grand Prize — Suncheon Cultural Foundation Everyday Arts Lab',
+    '제 11회 대한민국민화대전 특선': 'Excellence Award — 11th Korean Minhwa Grand Exhibition',
+    '제 10회 대한민국민화대전 입선': 'Selected — 10th Korean Minhwa Grand Exhibition',
+    '광양문화도시센터 원님길 조성사업 공모전 최우수상': 'Best Award — Gwangyang Culture City Wonnim-gil Project',
+    '제 7회 대한민국민화대전 특선': 'Excellence Award — 7th Korean Minhwa Grand Exhibition',
+  };
+  const projectsMap = {
+    '연필한자루 &lt;프롬프트를 입력하세요&gt; 참여': 'Yeonpil Hanjarou ⟨Enter a Prompt⟩ — Participant',
+    '갤러리142 &lt;월간예술가의 작업실&gt; 참여': 'Gallery 142 ⟨Monthly Artist Studio⟩ — Participant',
+    '광양시특수교육지원센터 &lt;지켜주는 민화&gt; 출강': 'Gwangyang Special Education Center — ⟨Protective Minhwa⟩ Instructor',
+    '전남문화재단 모두의문화예술교육 &lt;마음존중 탐구생활&gt;': 'Jeonnam Foundation — ⟨Exploring Emotional Respect⟩',
+    '순천문화재단 일상문화예술실험실 수상작 &lt;도깨비불 밝혀라&gt;': 'Suncheon Foundation — ⟨Light the Goblin Fire⟩ (Award Project)',
+    '순천문화재단 기획자양성과정 &lt;마음을 일궈요, 감정텃밭&gt;': 'Suncheon Foundation Curator Program — ⟨Cultivating the Heart⟩',
+    '전남문화재단 청년예술가 활동지원사업 &lt;듣는 민화, 보는 국악&gt;': 'Jeonnam Foundation Young Artist — ⟨Listening Minhwa, Seeing Gugak⟩',
+    '전남문화재단 모두의문화예술교육 &lt;다문화 속 색다른 문화이야기&gt;': 'Jeonnam Foundation — ⟨Multicultural Stories⟩',
+    '광양시 예비문화도시사업 &lt;시민궁리랩&gt; 문화원님길 참여': 'Gwangyang Culture City — Citizens Lab ⟨Wonnim-gil⟩',
+    '정채봉문학테마길 조성사업 '눈을 감고 보는 길' 민화 타일벽화': 'Jeong Chae-bong Literary Path — Minhwa Tile Mural',
+  };
+  if(isKo) return;
+  document.querySelectorAll('.ap-text').forEach(el => {
+    const txt = el.innerHTML;
+    if(awardsMap[txt]) el.textContent = awardsMap[txt];
+    else if(projectsMap[txt]) el.textContent = projectsMap[txt];
+  });
 
   // HTML lang 속성
   document.documentElement.lang = isKo ? 'ko' : 'en';
@@ -1195,24 +1264,6 @@ t.innerHTML = [...terms,...terms].map(s => `<span class="mq-i">${s}</span>`).joi
 document.getElementById('cr').textContent = `© ${new Date().getFullYear()} 박기량 Park Kiryang. All rights reserved.`;
 
 renderEx('all');
-
-/* ── 히어로 텍스처 배경 ── */
-(function(){
-  const bg = document.getElementById('heroTexture');
-  if(!bg) return;
-  const imgs = [
-    'gyeonggye.jpg','hae-hangari.jpg','dasi-saengil2.jpg','gilsangburn.jpg',
-    'yeoniip.jpg','haebang.jpg','pajyeong.jpg','jungseo.jpg','bugui.jpg',
-    'olang-yakgwa.jpg','sumul-got.jpg','gyeomson.jpg','dasi-saengil.jpg',
-    'gilsang-gido.jpg','haebang2.jpg','haebang3.jpg','wegov.jpg','hae-hangari-ihu.jpg'
-  ];
-  for(let i=0;i<18;i++){
-    const d = document.createElement('div');
-    d.className = 'hero-texture-item';
-    d.style.backgroundImage = "url('./"+imgs[i%imgs.length]+"')";
-    bg.appendChild(d);
-  }
-})();
 
 /* ── 언어 초기화 ── */
 (function(){
